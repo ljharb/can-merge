@@ -1,0 +1,27 @@
+{
+	"name": "can-merge",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"bin": {
+		"can-merge": "./index.js"
+	},
+	"scripts": {
+		"lint": "eslint --ext=js,mjs ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ljharb/can-merge.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ljharb/can-merge/issues"
+	},
+	"homepage": "https://github.com/ljharb/can-merge#readme",
+	"devDependencies": {
+		"@ljharb/eslint-config": "^17.6.0",
+		"eslint": "^7.29.0"
+	}
+}
