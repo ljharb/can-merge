@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const chalk = require('chalk');
+const Yargs = require('yargs');
+
+const getRepo = require('../utils/getRepo');
+const getSHA = require('../utils/getSHA');
+
+const runQuery = require('../utils/runQuery');
+const evaluatePullRequest = require('../utils/evaluatePullRequest');
+
+(async () => {
+	try {
+		const args = Yargs.usage('Usage: can-merge -p <pr> [-r <repo>]').options({
+			pr: {
+				alias: 'p',
+				demandOption: true,
+				describe: 'pull request',
+				type: 'string',
+			},
+			repo: {
+				alias: 'r',
+				'default': getRepo(),
+				demandOption: !getRepo(),
+				describe: 'repository',
+				type: 'string',
+			},
+			sha: {
+				alias: 's',
+				'default': getSHA(),
+				describe: 'commit SHA',
+				type: 'string',
+			},
+			token: {
+				alias: 't',
+				demandOption: !process.env.GITHUB_TOKEN,
+				describe: 'github access token',
+				type: 'string',
+			},
+		}).argv;
+
+		const token = process.env.GITHUB_TOKEN || args.token;
+
+		const response = await runQuery(args.repo, args.pr, token);
+
+		if (process.env.NODE_ENV === 'DEBUG') {
+			console.log(JSON.stringify(response, null, 2));
+		}
+
+		if (evaluatePullRequest(response)) {
+			process.exit(0);
+		} else {
+			process.exit(1);
+		}
+	} catch (error) {
+		console.error(chalk.redBright(error));
+		process.exit(1);
+	}
+})();
+

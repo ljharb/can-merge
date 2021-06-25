@@ -1,13 +1,17 @@
 {
 	"name": "can-merge",
-	"version": "1.0.0",
+	"version": "0.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "./bin/can-merge",
 	"bin": {
-		"can-merge": "./index.js"
+		"can-merge": "./bin/can-merge"
 	},
 	"scripts": {
-		"lint": "eslint --ext=js,mjs ."
+		"lint": "eslint --ext=js,mjs .",
+		"pretest": "npm run lint",
+		"tests-only": "nyc tape 'test/**/*.js'| tap-spec",
+		"test": "npm run tests-only",
+		"posttest": "aud --production"
 	},
 	"repository": {
 		"type": "git",
@@ -22,6 +26,19 @@
 	"homepage": "https://github.com/ljharb/can-merge#readme",
 	"devDependencies": {
 		"@ljharb/eslint-config": "^17.6.0",
-		"eslint": "^7.29.0"
+		"aud": "^1.1.5",
+		"eslint": "^7.29.0",
+		"nyc": "^15.1.0",
+		"tap-spec": "^5.0.0",
+		"tape": "^5.2.2"
+	},
+	"dependencies": {
+		"@octokit/graphql": "^4.6.4",
+		"chalk": "^4.1.1",
+		"dedent": "^0.7.0",
+		"yargs": "^16.2.0"
+	},
+	"engines": {
+		"node": "^16 || ^15 || ^14 || ^13 || ^12"
 	}
 }
