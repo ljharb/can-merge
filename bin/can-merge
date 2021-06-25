@@ -5,6 +5,8 @@
 const Yargs = require('yargs');
 const chalk = require('chalk');
 require('dotenv').config();
+
+const watch = require('../utils/watch');
 const getRepo = require('../utils/getRepo');
 const getSHA = require('../utils/getSHA');
 
@@ -50,6 +52,11 @@ const args = Yargs
 			describe: 'repository',
 			type: 'string',
 		},
+		retryDelay: {
+			default: 5e3,
+			describe: 'delay before polling the api',
+			type: 'number',
+		},
 		sha: {
 			alias: 's',
 			default: getSHA(process.cwd(), true),
@@ -62,6 +69,18 @@ const args = Yargs
 			describe: 'github access token',
 			type: 'string',
 		},
+		watch: {
+			alias: 'w',
+			default: false,
+			describe: 'watch pending checks',
+			type: 'boolean',
+		},
+	})
+	.check((argv) => {
+		if (argv.watch && !argv.pr) {
+			throw new Error('Error: Must specify a pr to watch');
+		}
+		return true;
 	})
 	.check((argv) => {
 		if (argv.repo !== REPO && argv.remote !== ORIGIN) {
@@ -94,6 +113,7 @@ const args = Yargs
 const token = args.token || GITHUB_TOKEN || GH_TOKEN;
 
 function outputStatus(response) {
+	console.clear();
 	if (NODE_ENV === 'DEBUG') {
 		console.log(JSON.stringify(response, null, 2));
 	}
@@ -125,6 +145,13 @@ function outputStatus(response) {
 const { repo, pr, sha } = args;
 const params = { repo: String(repo), pr, sha, token };
 
-runQuery(params).then((response) => {
-	outputStatus(response);
-});
+if (args.watch) {
+	console.log('Waiting for all checks to complete ...\n');
+	watch(args.retryDelay, () => runQuery(params)).then((response) => {
+		outputStatus(response);
+	});
+} else {
+	runQuery(params).then((response) => {
+		outputStatus(response);
+	});
+}

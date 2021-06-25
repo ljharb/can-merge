@@ -7,9 +7,16 @@ const evaluatePullRequest = require('../utils/evaluatePullRequest');
 const parsePullRequest = require('../utils/parsePullRequest');
 const getRepo = require('../utils/getRepo');
 const getSHA = require('../utils/getSHA');
+const watch = require('../utils/watch');
 
 const mockEvalPR = require('./mocks/evalPR');
 const mockParsePR = require('./mocks/parsePR.json');
+const mockWatchPR = require('./mocks/watchPR.json');
+
+const iter = (iterable) => {
+	const it = iterable.values();
+	return () => it.next().value;
+};
 
 test('evaluatePullRequest', (t) => {
 	mockEvalPR.forEach((mock) => {
@@ -45,4 +52,11 @@ test('getSHA', (t) => {
 	t.ok(long.startsWith(short), 'short SHA is a prefix of long SHA');
 
 	t.end();
+});
+
+test('watchPR', async (t) => {
+	for (const mock of mockWatchPR) {
+		const result = await watch(5e3, iter(mock.responses)); // eslint-disable-line no-await-in-loop
+		t.equals(mock.responses[mock.responses.length - 1], result, mock.description);
+	}
 });
