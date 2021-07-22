@@ -27,7 +27,7 @@
 	"devDependencies": {
 		"@ljharb/eslint-config": "^17.6.0",
 		"aud": "^1.1.5",
-		"eslint": "^7.29.0",
+		"eslint": "^7.31.0",
 		"nyc": "^15.1.0",
 		"tap-spec": "^5.0.0",
 		"tape": "^5.2.2"
