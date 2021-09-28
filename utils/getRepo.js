@@ -1,10 +1,12 @@
 'use strict';
 
-const fork = require('child_process');
+const { execSync } = require('child_process');
 
-const getRepo = () => fork
-	.execSync('git config --get remote.origin.url | grep -Po "(?<=git@github\\.com:)(.*?)(?=.git)"')
-	.toString()
-	.trim();
+const getRepo = () => {
+	const getRepos = String(execSync('git remote -v'));
+	const pushRepoRegex = /(?<=github.com\/)(.*)(?=.git \(push\))/gm;
+	return getRepos.match(pushRepoRegex)[0];
+
+};
 
 module.exports = getRepo;
