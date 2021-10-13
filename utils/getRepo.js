@@ -3,8 +3,8 @@
 const { execSync } = require('child_process');
 
 const getRepo = () => {
-	const getRepos = String(execSync('git remote -v'));
-	const pushRepoRegex = /(?<=github.com\/)(.*)(?=.git \(push\))/gm;
+	const getRepos = String(execSync('git ls-remote --get-url'));
+	const pushRepoRegex = /(?<=github\.com\/)(.*)(?=\.git)/gm;
 	return getRepos.match(pushRepoRegex)[0];
 
 };
