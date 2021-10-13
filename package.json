@@ -25,12 +25,12 @@
 	},
 	"homepage": "https://github.com/ljharb/can-merge#readme",
 	"devDependencies": {
-		"@ljharb/eslint-config": "^17.6.0",
+		"@ljharb/eslint-config": "^18.0.0",
 		"aud": "^1.1.5",
-		"eslint": "^7.31.0",
+		"eslint": "^7.32.0",
 		"nyc": "^15.1.0",
 		"tap-spec": "^5.0.0",
-		"tape": "^5.2.2"
+		"tape": "^5.3.1"
 	},
 	"dependencies": {
 		"@octokit/graphql": "^4.6.4",
