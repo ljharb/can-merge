@@ -2,11 +2,8 @@
 
 const { execSync } = require('child_process');
 
-const getRepo = () => {
+module.exports = function getRepo() {
 	const getRepos = String(execSync('git ls-remote --get-url'));
-	const pushRepoRegex = /(?<=github\.com\/)(.*)(?=\.git)/gm;
+	const pushRepoRegex = /(?<=github\.com(\/|:))(.*)(?=\.git*)/gm;
 	return getRepos.match(pushRepoRegex)[0];
-
 };
-
-module.exports = getRepo;
