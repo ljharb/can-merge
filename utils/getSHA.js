@@ -1,7 +1,7 @@
 'use strict';
 
-const fork = require('child_process');
+const { execSync } = require('child_process');
 
-const getSHA = () => fork.execSync('git rev-parse HEAD').toString().trim();
-
-module.exports = getSHA;
+module.exports = function getSHA() {
+    return String(execSync('git rev-parse --short HEAD')).trim();
+};
