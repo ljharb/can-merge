@@ -49,7 +49,8 @@ const evaluatePullRequest = require('../utils/evaluatePullRequest');
 			console.log(JSON.stringify(response, null, 2));
 		}
 
-		if (evaluatePullRequest(response)) {
+		const { pullRequest } = response.repository;
+		if (pullRequest && evaluatePullRequest(pullRequest, response)) {
 			process.exit(0);
 		} else {
 			process.exit(1);
