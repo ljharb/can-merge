@@ -11,53 +11,58 @@ const getSHA = require('../utils/getSHA');
 const runQuery = require('../utils/runQuery');
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
 
-(async () => {
-	try {
-		const args = Yargs.usage('Usage: can-merge -p <pr> [-r <repo>]').options({
-			pr: {
-				alias: 'p',
-				demandOption: true,
-				describe: 'pull request',
-				type: 'string',
-			},
-			repo: {
-				alias: 'r',
-				'default': getRepo(),
-				demandOption: !getRepo(),
-				describe: 'repository',
-				type: 'string',
-			},
-			sha: {
-				alias: 's',
-				'default': getSHA(),
-				describe: 'commit SHA',
-				type: 'string',
-			},
-			token: {
-				alias: 't',
-				demandOption: !process.env.GITHUB_TOKEN,
-				describe: 'github access token',
-				type: 'string',
-			},
-		}).argv;
+const {
+	GITHUB_TOKEN,
+	GH_TOKEN,
+	NODE_ENV,
+} = process.env;
 
-		const token = process.env.GITHUB_TOKEN || args.token;
+const args = Yargs
+	.usage('Usage: can-merge -p <pr> [-r <repo>]')
+	.help()
+	.strict()
+	.options({
+		pr: {
+			alias: 'p',
+			demandOption: true,
+			describe: 'pull request',
+			type: 'string',
+		},
+		repo: {
+			alias: 'r',
+			'default': getRepo(),
+			demandOption: !getRepo(),
+			describe: 'repository',
+			type: 'string',
+		},
+		sha: {
+			alias: 's',
+			'default': getSHA(),
+			describe: 'commit SHA',
+			type: 'string',
+		},
+		token: {
+			alias: 't',
+			demandOption: !GITHUB_TOKEN,
+			describe: 'github access token',
+			type: 'string',
+		},
+	})
+	.parse();
 
-		const response = await runQuery(args.repo, args.pr, token);
+const token = args.token || GITHUB_TOKEN || GH_TOKEN;
 
-		if (process.env.NODE_ENV === 'DEBUG') {
-			console.log(JSON.stringify(response, null, 2));
-		}
-
-		const { pullRequest } = response.repository;
-		if (pullRequest && evaluatePullRequest(pullRequest, response)) {
-			process.exit(0);
-		} else {
-			process.exit(1);
-		}
-	} catch (error) {
-		console.error(chalk.redBright(error));
-		process.exit(1);
+runQuery(args.repo, args.pr, token).then((response) => {
+	if (NODE_ENV === 'DEBUG') {
+		console.log(JSON.stringify(response, null, 2));
 	}
-})();
+
+	const { pullRequest } = response.repository;
+	if (!pullRequest || !evaluatePullRequest(pullRequest, response)) {
+		process.exitCode = 1;
+	}
+}).catch((error) => {
+	console.error(chalk.redBright(error));
+	process.exitCode = 1;
+});
 
