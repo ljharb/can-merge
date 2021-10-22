@@ -43,7 +43,7 @@ const args = Yargs
 		},
 		token: {
 			alias: 't',
-			demandOption: !GITHUB_TOKEN,
+			demandOption: !(GITHUB_TOKEN || GH_TOKEN),
 			describe: 'github access token',
 			type: 'string',
 		},
