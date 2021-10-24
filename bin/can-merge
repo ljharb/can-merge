@@ -24,7 +24,7 @@ const args = Yargs
 	.options({
 		pr: {
 			alias: 'p',
-			demandOption: true,
+			demandOption: false,
 			describe: 'pull request',
 			type: 'string',
 		},
@@ -57,9 +57,19 @@ runQuery(args.repo, args.pr, token).then((response) => {
 		console.log(JSON.stringify(response, null, 2));
 	}
 
-	const { pullRequest } = response.repository;
-	if (!pullRequest || !evaluatePullRequest(pullRequest, response)) {
-		process.exitCode = 1;
+	const { pullRequest, pullRequests: { nodes: prNodes } } = response.repository;
+	if (args.pr) {
+		if (!pullRequest || !evaluatePullRequest(pullRequest, response)) {
+			process.exit(1);
+		}
+	} else if (prNodes.length === 0) {
+		console.error(chalk.redBright('No Pull Request Found'));
+		process.exit(1);
+	} else {
+		prNodes.forEach((node) => {
+			const resp = { repository: { pullRequest: node } };
+			evaluatePullRequest(node, resp);
+		});
 	}
 }).catch((error) => {
 	console.error(chalk.redBright(error));

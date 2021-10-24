@@ -12,6 +12,9 @@ const doesPRHaveConflicts = (pullRequest) => pullRequest.mergeable === 'MERGEABL
 
 // eslint-disable-next-line max-statements
 const evaluatePullRequest = (pullRequest, response) => {
+	if (!pullRequest) {
+		return false;
+	}
 	const {
 		number,
 		state,
