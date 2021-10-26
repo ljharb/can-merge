@@ -3,6 +3,7 @@
 const test = require('tape');
 
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
+const evaluatePRs = require('../utils/evaluatePRs');
 
 const { mockResponses } = require('./mocks');
 
@@ -19,6 +20,15 @@ test('evaluatePullRequest', (t) => {
 				st.equal(evaluatePullRequest(pr, mock.res), mock.expected, mock.description);
 			});
 		});
+	});
+	t.end();
+});
+
+test('evaluatePRs', { todo: true }, (t) => {
+	t.plan(mockResponses.length);
+	mockResponses.forEach((mock) => {
+		t.error(evaluatePRs(true, mock.res));
+		t.error(evaluatePRs(false, mock.res));
 	});
 	t.end();
 });

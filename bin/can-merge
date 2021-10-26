@@ -9,7 +9,7 @@ const getRepo = require('../utils/getRepo');
 const getSHA = require('../utils/getSHA');
 
 const runQuery = require('../utils/runQuery');
-const evaluatePullRequest = require('../utils/evaluatePullRequest');
+const evaluatePRs = require('../utils/evaluatePRs');
 
 const {
 	GITHUB_TOKEN,
@@ -56,23 +56,9 @@ runQuery(args.repo, args.pr, token).then((response) => {
 	if (NODE_ENV === 'DEBUG') {
 		console.log(JSON.stringify(response, null, 2));
 	}
-
-	const { pullRequest, pullRequests: { nodes: prNodes } } = response.repository;
-	if (args.pr) {
-		if (!pullRequest || !evaluatePullRequest(pullRequest, response)) {
-			process.exit(1);
-		}
-	} else if (prNodes.length === 0) {
-		console.error(chalk.redBright('No Pull Request Found'));
-		process.exit(1);
-	} else {
-		prNodes.forEach((node) => {
-			const resp = { repository: { pullRequest: node } };
-			evaluatePullRequest(node, resp);
-		});
+	const evaluated = evaluatePRs(args.pr, response);
+	if (!evaluated) {
+		process.exitCode = 1;
 	}
-}).catch((error) => {
-	console.error(chalk.redBright(error));
-	process.exitCode = 1;
 });
 
