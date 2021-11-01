@@ -24,11 +24,10 @@ test('evaluatePullRequest', (t) => {
 	t.end();
 });
 
-test('evaluatePRs', { todo: true }, (t) => {
-	t.plan(mockResponses.length);
+test('evaluatePRs', { skip: true }, (t) => {
+	t.plan(mockResponses.length * 2);
 	mockResponses.forEach((mock) => {
-		t.error(evaluatePRs(true, mock.res));
-		t.error(evaluatePRs(false, mock.res));
+		t.equal(evaluatePRs(true, mock.res), true);
+		t.equal(evaluatePRs(false, mock.res), false);
 	});
-	t.end();
 });
