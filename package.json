@@ -7,7 +7,7 @@
 		"can-merge": "./bin/can-merge"
 	},
 	"scripts": {
-		"lint": "eslint --ext=js,mjs .",
+		"lint": "eslint --ext=js,mjs bin/** .",
 		"pretest": "npm run lint",
 		"tests-only": "nyc tape 'test/**/*.js'| tap-spec",
 		"test": "npm run tests-only",

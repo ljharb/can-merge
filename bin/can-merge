@@ -2,7 +2,6 @@
 
 'use strict';
 
-const chalk = require('chalk');
 const Yargs = require('yargs');
 require('dotenv').config();
 const getRepo = require('../utils/getRepo');
