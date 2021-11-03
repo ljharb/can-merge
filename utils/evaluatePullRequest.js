@@ -11,7 +11,7 @@ const getConclusionString = ({ commits: { nodes } }) => nodes
 const doesPRHaveConflicts = (pullRequest) => pullRequest.mergeable === 'MERGEABLE';
 
 // eslint-disable-next-line max-statements
-const evaluatePullRequest = (pullRequest, response) => {
+module.exports = function evaluatePullRequest(pullRequest, response) {
 	if (!pullRequest) {
 		return false;
 	}
@@ -73,5 +73,3 @@ const evaluatePullRequest = (pullRequest, response) => {
 	console.info(chalk.greenBright('PR:', number, '✔ This PR is mergeable'));
 	return true;
 };
-
-module.exports = evaluatePullRequest;

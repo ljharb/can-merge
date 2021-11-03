@@ -4,7 +4,7 @@ const { graphql } = require('@octokit/graphql');
 
 const buildQuery = require('./buildQuery');
 
-const runQuery = async (repo, pr, token) => {
+module.exports = async function runQuery(repo, pr, token) {
 	const [owner, name] = repo.split('/');
 	const response = await graphql(buildQuery(owner, name, pr), {
 		headers: {
@@ -13,5 +13,3 @@ const runQuery = async (repo, pr, token) => {
 	});
 	return response;
 };
-
-module.exports = runQuery;
