@@ -7,6 +7,8 @@
 		"can-merge": "./bin/can-merge"
 	},
 	"scripts": {
+		"prepublishOnly": "safe-publish-latest",
+		"prepublish": "not-in-publish || npm run prepublishOnly",
 		"lint": "eslint --ext=js,mjs bin/** .",
 		"pretest": "npm run lint",
 		"tests-only": "nyc tape 'test/**/*.js'| tap-spec",
@@ -28,7 +30,9 @@
 		"@ljharb/eslint-config": "^18.0.0",
 		"aud": "^1.1.5",
 		"eslint": "^7.32.0",
+		"in-publish": "^2.0.1",
 		"nyc": "^15.1.0",
+		"safe-publish-latest": "^2.0.0",
 		"tap-spec": "^5.0.0",
 		"tape": "^5.3.1"
 	},
