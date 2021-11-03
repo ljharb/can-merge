@@ -3,12 +3,15 @@
 'use strict';
 
 const Yargs = require('yargs');
+const chalk = require('chalk');
 require('dotenv').config();
 const getRepo = require('../utils/getRepo');
 const getSHA = require('../utils/getSHA');
 
 const runQuery = require('../utils/runQuery');
-const evaluatePRs = require('../utils/evaluatePRs');
+const evaluatePullRequest = require('../utils/evaluatePullRequest');
+const logger = require('../utils/logger');
+const parsePullRequest = require('../utils/parsePullRequest');
 
 const {
 	GITHUB_TOKEN,
@@ -55,9 +58,14 @@ runQuery(args.repo, args.pr, token).then((response) => {
 	if (NODE_ENV === 'DEBUG') {
 		console.log(JSON.stringify(response, null, 2));
 	}
-	const evaluated = evaluatePRs(args.pr, response);
-	if (!evaluated) {
+	const prs = parsePullRequest(response.repository);
+	if (prs.length === 0) {
+		console.info(chalk.redBright(`⚠ This repository does not contain any pull requests matching ${args.sha}`));
 		process.exitCode = 1;
+	} else {
+		prs.forEach((pr) => {
+			console.info('PR:', pr.number, logger(evaluatePullRequest(pr)));
+		});
 	}
 });
 
