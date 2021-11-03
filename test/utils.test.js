@@ -17,7 +17,7 @@ test('evaluatePullRequest', (t) => {
 		t.test(`mock: ${mock.description}:`, { skip: PRs.length === 0 }, (st) => {
 			st.plan(PRs.length);
 			PRs.forEach((pr) => {
-				st.equal(evaluatePullRequest(pr, mock.res), mock.expected, mock.description);
+				st.equal(evaluatePullRequest(pr), mock.expected, mock.description);
 			});
 		});
 	});

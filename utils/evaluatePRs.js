@@ -1,6 +1,7 @@
 'use strict';
 
 const evaluatePullRequest = require('./evaluatePullRequest');
+const logger = require('../utils/logger');
 
 module.exports = function evaluatePRs(pr, response) {
 	const { pullRequest } = response.repository;
@@ -15,5 +16,5 @@ module.exports = function evaluatePRs(pr, response) {
 		return false;
 	}
 	return prArgs.length > 0 && prArgs
-		.reduce((status, [node, resp]) => evaluatePullRequest(node, resp) && status, true);
+		.reduce((status, [node, resp]) => console.info('PR:', node.number, logger(evaluatePullRequest(resp))) && status, true);
 };

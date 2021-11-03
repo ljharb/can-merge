@@ -1,5 +1,7 @@
 'use strict';
 
+const pullRequestStatus = require('../utils/models/pullRequestStatus');
+
 const mockResponses = [
 	{
 		res: {
@@ -267,8 +269,8 @@ const mockResponses = [
 				remaining: 4997,
 			},
 		},
-		expected: false,
-		description: 'evaluation of a PR with FAILURE should return false',
+		expected: pullRequestStatus.STATUS_FAILURE,
+		description: 'evaluation of a PR with FAILURE should return STATUS_FAILURE',
 	},
 	{
 		res: {
@@ -541,8 +543,8 @@ const mockResponses = [
 				remaining: 4994,
 			},
 		},
-		expected: false,
-		description: 'evalutation of a PR with PENDING should return false',
+		expected: pullRequestStatus.STATUS_PENDING,
+		description: 'evalutation of a PR with PENDING should return STATUS_PENDING',
 	},
 	{
 		res: {
@@ -816,8 +818,8 @@ const mockResponses = [
 				remaining: 4992,
 			},
 		},
-		expected: true,
-		description: 'evaluation of a PR with SUCCESS should return true',
+		expected: pullRequestStatus.MERGEABLE,
+		description: 'evaluation of a PR with SUCCESS should return MERGEABLE',
 	},
 	// repo with 0 PRs without p arg
 	{
@@ -836,8 +838,7 @@ const mockResponses = [
 			},
 		},
 		expected: false,
-		description:
-			'Without p arg: evaluation of a repository with 0 PRs should return false',
+		description: 'Without p arg: evaluation of a repository with 0 PRs should return false',
 	},
 	// repo with 0 PRs with p arg
 	{
@@ -854,8 +855,7 @@ const mockResponses = [
 			},
 		},
 		expected: false,
-		description:
-			'With p arg: evaluation of a repository with 0 PRs should return false',
+		description: 'With p arg: evaluation of a repository with 0 PRs should return false',
 	},
 	// repo with 1 PR without p arg
 	{
@@ -896,9 +896,8 @@ const mockResponses = [
 				remaining: 4945,
 			},
 		},
-		expected: true,
-		description:
-			'Without p arg: evaluation of a repository with 1 PR should return true',
+		expected: pullRequestStatus.MERGEABLE,
+		description: 'Without p arg: evaluation of a repository with 1 PR should return MERGEABLE',
 	},
 	// repo with 1 PR with p arg
 	{
@@ -935,9 +934,8 @@ const mockResponses = [
 				remaining: 4947,
 			},
 		},
-		expected: true,
-		description:
-			'With p arg: evaluation of a repository with 1 PR should return true',
+		expected: pullRequestStatus.MERGEABLE,
+		description: 'With p arg: evaluation of a repository with 1 PR should return MERGEABLE',
 	},
 	// repo with 2+ PRs without p arg
 	{
@@ -1022,9 +1020,8 @@ const mockResponses = [
 				remaining: 4997,
 			},
 		},
-		expected: true,
-		description:
-			'Without p arg: evaluation of a repository with 2+ PRs should return true',
+		expected: pullRequestStatus.MERGEABLE,
+		description: 'Without p arg: evaluation of a repository with 2+ PRs should return MERGEABLE',
 	},
 	// repo with 2+ PRs with p arg
 	{
@@ -1061,9 +1058,8 @@ const mockResponses = [
 				remaining: 4999,
 			},
 		},
-		expected: true,
-		description:
-			'With p arg: evaluation of a repository with 2+ PRs should return true',
+		expected: pullRequestStatus.MERGEABLE,
+		description: 'With p arg: evaluation of a repository with 2+ PRs should return MERGEABLE',
 	},
 ];
 
