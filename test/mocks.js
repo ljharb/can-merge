@@ -2,7 +2,7 @@
 
 const pullRequestStatus = require('../utils/models/pullRequestStatus');
 
-const mockResponses = [
+const mockEvalPR = [
 	{
 		res: {
 			repository: {
@@ -821,248 +821,244 @@ const mockResponses = [
 		expected: pullRequestStatus.MERGEABLE,
 		description: 'evaluation of a PR with SUCCESS should return MERGEABLE',
 	},
-	// repo with 0 PRs without p arg
+];
+const mockParsePR = [
 	{
-		res: {
-			repository: {
-				branchProtectionRules: {
-					nodes: [],
-				},
-				pullRequests: {
-					nodes: [],
-				},
+
+		repository: {
+			branchProtectionRules: {
+				nodes: [],
 			},
-			rateLimit: {
-				cost: 2,
-				remaining: 4959,
+			pullRequests: {
+				nodes: [],
 			},
 		},
-		expected: false,
-		description: 'Without p arg: evaluation of a repository with 0 PRs should return false',
+		rateLimit: {
+			cost: 2,
+			remaining: 4959,
+		},
+
+		expected: [],
+		description: 'No pr found: No pr found in repository should return an empty array',
 	},
-	// repo with 0 PRs with p arg
 	{
-		res: {
-			repository: {
-				branchProtectionRules: {
-					nodes: [],
-				},
-				pullRequest: null,
+
+		repository: {
+			branchProtectionRules: {
+				nodes: [],
 			},
-			rateLimit: {
-				cost: 1,
-				remaining: 4954,
+			pullRequests: {
+				nodes: [
+					{
+						state: 'OPEN',
+						url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
+						title: 'dummy PR',
+						number: 1,
+						merged: false,
+						mergeable: 'MERGEABLE',
+						reviewDecision: null,
+						potentialMergeCommit: {
+							commitUrl:
+								'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
+						},
+						commits: {
+							nodes: [
+								{
+									commit: {
+										statusCheckRollup: null,
+									},
+								},
+							],
+						},
+					},
+				],
 			},
 		},
-		expected: false,
-		description: 'With p arg: evaluation of a repository with 0 PRs should return false',
-	},
-	// repo with 1 PR without p arg
-	{
-		res: {
-			repository: {
-				branchProtectionRules: {
-					nodes: [],
+		rateLimit: {
+			cost: 2,
+			remaining: 4945,
+		},
+
+		expected: [
+			{
+				state: 'OPEN',
+				url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
+				title: 'dummy PR',
+				number: 1,
+				merged: false,
+				mergeable: 'MERGEABLE',
+				reviewDecision: null,
+				potentialMergeCommit: {
+					commitUrl:
+						'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
 				},
-				pullRequests: {
+				commits: {
 					nodes: [
 						{
-							state: 'OPEN',
-							url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
-							title: 'dummy PR',
-							number: 1,
-							merged: false,
-							mergeable: 'MERGEABLE',
-							reviewDecision: null,
-							potentialMergeCommit: {
-								commitUrl:
-									'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
-							},
-							commits: {
-								nodes: [
-									{
-										commit: {
-											statusCheckRollup: null,
-										},
-									},
-								],
+							commit: {
+								statusCheckRollup: null,
 							},
 						},
 					],
 				},
 			},
-			rateLimit: {
-				cost: 2,
-				remaining: 4945,
-			},
-		},
-		expected: pullRequestStatus.MERGEABLE,
-		description: 'Without p arg: evaluation of a repository with 1 PR should return MERGEABLE',
+		],
+		description: 'One pr found: One pr found should return an array of length === 1',
 	},
-	// repo with 1 PR with p arg
 	{
-		res: {
-			repository: {
-				branchProtectionRules: {
-					nodes: [],
-				},
-				pullRequest: {
-					state: 'OPEN',
-					url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
-					title: 'dummy PR',
-					number: 1,
-					merged: false,
-					mergeable: 'MERGEABLE',
-					reviewDecision: null,
-					potentialMergeCommit: {
-						commitUrl:
-							'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
-					},
-					commits: {
-						nodes: [
-							{
-								commit: {
-									statusCheckRollup: null,
+
+		repository: {
+			branchProtectionRules: {
+				nodes: [],
+			},
+			pullRequests: {
+				nodes: [
+					{
+						state: 'OPEN',
+						url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
+						title: 'dummy PR',
+						number: 1,
+						merged: false,
+						mergeable: 'MERGEABLE',
+						reviewDecision: null,
+						potentialMergeCommit: {
+							commitUrl:
+								'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
+						},
+						commits: {
+							nodes: [
+								{
+									commit: {
+										statusCheckRollup: null,
+									},
 								},
-							},
-						],
+							],
+						},
 					},
-				},
-			},
-			rateLimit: {
-				cost: 1,
-				remaining: 4947,
+					{
+						state: 'OPEN',
+						url: 'https://github.com/MeghalBisht/dummy-repo/pull/2',
+						title: 'dummy PR 2',
+						number: 2,
+						merged: false,
+						mergeable: 'MERGEABLE',
+						reviewDecision: null,
+						potentialMergeCommit: {
+							commitUrl:
+								'https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d',
+						},
+						commits: {
+							nodes: [
+								{
+									commit: {
+										statusCheckRollup: null,
+									},
+								},
+							],
+						},
+					},
+					{
+						state: 'OPEN',
+						url: 'https://github.com/MeghalBisht/dummy-repo/pull/3',
+						title: 'dummy PR 3',
+						number: 3,
+						merged: false,
+						mergeable: 'MERGEABLE',
+						reviewDecision: null,
+						potentialMergeCommit: {
+							commitUrl:
+								'https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1',
+						},
+						commits: {
+							nodes: [
+								{
+									commit: {
+										statusCheckRollup: null,
+									},
+								},
+							],
+						},
+					},
+				],
 			},
 		},
-		expected: pullRequestStatus.MERGEABLE,
-		description: 'With p arg: evaluation of a repository with 1 PR should return MERGEABLE',
-	},
-	// repo with 2+ PRs without p arg
-	{
-		res: {
-			repository: {
-				branchProtectionRules: {
-					nodes: [],
+		rateLimit: {
+			cost: 2,
+			remaining: 4997,
+		},
+		expected: [
+			{
+				state: 'OPEN',
+				url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
+				title: 'dummy PR',
+				number: 1,
+				merged: false,
+				mergeable: 'MERGEABLE',
+				reviewDecision: null,
+				potentialMergeCommit: {
+					commitUrl:
+						'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
 				},
-				pullRequests: {
+				commits: {
 					nodes: [
 						{
-							state: 'OPEN',
-							url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
-							title: 'dummy PR',
-							number: 1,
-							merged: false,
-							mergeable: 'MERGEABLE',
-							reviewDecision: null,
-							potentialMergeCommit: {
-								commitUrl:
-									'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
-							},
-							commits: {
-								nodes: [
-									{
-										commit: {
-											statusCheckRollup: null,
-										},
-									},
-								],
-							},
-						},
-						{
-							state: 'OPEN',
-							url: 'https://github.com/MeghalBisht/dummy-repo/pull/2',
-							title: 'dummy PR 2',
-							number: 2,
-							merged: false,
-							mergeable: 'MERGEABLE',
-							reviewDecision: null,
-							potentialMergeCommit: {
-								commitUrl:
-									'https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d',
-							},
-							commits: {
-								nodes: [
-									{
-										commit: {
-											statusCheckRollup: null,
-										},
-									},
-								],
-							},
-						},
-						{
-							state: 'OPEN',
-							url: 'https://github.com/MeghalBisht/dummy-repo/pull/3',
-							title: 'dummy PR 3',
-							number: 3,
-							merged: false,
-							mergeable: 'MERGEABLE',
-							reviewDecision: null,
-							potentialMergeCommit: {
-								commitUrl:
-									'https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1',
-							},
-							commits: {
-								nodes: [
-									{
-										commit: {
-											statusCheckRollup: null,
-										},
-									},
-								],
+							commit: {
+								statusCheckRollup: null,
 							},
 						},
 					],
 				},
 			},
-			rateLimit: {
-				cost: 2,
-				remaining: 4997,
-			},
-		},
-		expected: pullRequestStatus.MERGEABLE,
-		description: 'Without p arg: evaluation of a repository with 2+ PRs should return MERGEABLE',
-	},
-	// repo with 2+ PRs with p arg
-	{
-		res: {
-			repository: {
-				branchProtectionRules: {
-					nodes: [],
+			{
+				state: 'OPEN',
+				url: 'https://github.com/MeghalBisht/dummy-repo/pull/2',
+				title: 'dummy PR 2',
+				number: 2,
+				merged: false,
+				mergeable: 'MERGEABLE',
+				reviewDecision: null,
+				potentialMergeCommit: {
+					commitUrl:
+						'https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d',
 				},
-				pullRequest: {
-					state: 'OPEN',
-					url: 'https://github.com/MeghalBisht/dummy-repo/pull/2',
-					title: 'dummy PR 2',
-					number: 2,
-					merged: false,
-					mergeable: 'MERGEABLE',
-					reviewDecision: null,
-					potentialMergeCommit: {
-						commitUrl:
-							'https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d',
-					},
-					commits: {
-						nodes: [
-							{
-								commit: {
-									statusCheckRollup: null,
-								},
+				commits: {
+					nodes: [
+						{
+							commit: {
+								statusCheckRollup: null,
 							},
-						],
-					},
+						},
+					],
 				},
 			},
-			rateLimit: {
-				cost: 1,
-				remaining: 4999,
+			{
+				state: 'OPEN',
+				url: 'https://github.com/MeghalBisht/dummy-repo/pull/3',
+				title: 'dummy PR 3',
+				number: 3,
+				merged: false,
+				mergeable: 'MERGEABLE',
+				reviewDecision: null,
+				potentialMergeCommit: {
+					commitUrl:
+						'https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1',
+				},
+				commits: {
+					nodes: [
+						{
+							commit: {
+								statusCheckRollup: null,
+							},
+						},
+					],
+				},
 			},
-		},
-		expected: pullRequestStatus.MERGEABLE,
-		description: 'With p arg: evaluation of a repository with 2+ PRs should return MERGEABLE',
+		],
+		description: 'Multiple prs found: multiple prs found should return all prs',
 	},
 ];
 
 module.exports = {
-	mockResponses,
+	mockEvalPR,
+	mockParsePR,
 };

@@ -3,31 +3,22 @@
 const test = require('tape');
 
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
-const evaluatePRs = require('../utils/evaluatePRs');
+const parsePullRequest = require('../utils/parsePullRequest');
 
-const { mockResponses } = require('./mocks');
+const { mockEvalPR, mockParsePR } = require('./mocks');
 
 test('evaluatePullRequest', (t) => {
-	t.plan(mockResponses.length);
-	mockResponses.forEach((mock) => {
-		const PRs = [].concat(
-			mock.res.repository.pullRequest || [],
-			mock.res.repository.pullRequests?.nodes || [],
-		);
-		t.test(`mock: ${mock.description}:`, { skip: PRs.length === 0 }, (st) => {
-			st.plan(PRs.length);
-			PRs.forEach((pr) => {
-				st.equal(evaluatePullRequest(pr), mock.expected, mock.description);
-			});
-		});
+	t.plan(mockEvalPR.length);
+	mockEvalPR.forEach((mock) => {
+		t.equal(evaluatePullRequest(mock.res.repository.pullRequest), mock.expected, mock.description);
 	});
 	t.end();
 });
 
-test('evaluatePRs', { skip: true }, (t) => {
-	t.plan(mockResponses.length * 2);
-	mockResponses.forEach((mock) => {
-		t.equal(evaluatePRs(true, mock.res), true);
-		t.equal(evaluatePRs(false, mock.res), false);
+test('parsePullRequest', (t) => {
+	t.plan(mockParsePR.length);
+	mockParsePR.forEach((mock) => {
+		t.deepEqual(parsePullRequest(mock.repository), mock.expected, mock.description);
 	});
+	t.end();
 });
