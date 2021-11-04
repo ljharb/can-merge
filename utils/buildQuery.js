@@ -43,7 +43,7 @@ const pullRequestQuery = () => `
 `;
 
 module.exports = function buildQuery(owner, name, pr) {
-    return `
+	return `
       {
         repository(owner: "${owner}", name: "${name}") {
           branchProtectionRules(first: 10) {
