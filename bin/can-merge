@@ -12,6 +12,7 @@ const runQuery = require('../utils/runQuery');
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
 const logger = require('../utils/logger');
 const parsePullRequest = require('../utils/parsePullRequest');
+const pullRequestStatus = require('../utils/models/pullRequestStatus');
 
 const {
 	GITHUB_TOKEN,
@@ -64,7 +65,11 @@ runQuery(args.repo, args.pr, token).then((response) => {
 		process.exitCode = 1;
 	} else {
 		prs.forEach((pr) => {
-			console.info('PR:', pr.number, logger(evaluatePullRequest(pr)));
+			const status = evaluatePullRequest(pr);
+			console.info('PR:', pr.number, logger(status));
+			if (status !== pullRequestStatus.MERGEABLE) {
+				process.exitCode = (process.exitCode ?? 0) + 1;
+			}
 		});
 	}
 });
