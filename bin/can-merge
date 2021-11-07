@@ -10,6 +10,7 @@ const getSHA = require('../utils/getSHA');
 
 const runQuery = require('../utils/runQuery');
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
+const evaluateChecks = require('../utils/evaluateChecks');
 const logger = require('../utils/logger');
 const parsePullRequest = require('../utils/parsePullRequest');
 const pullRequestStatus = require('../utils/models/pullRequestStatus');
@@ -69,6 +70,16 @@ runQuery(args.repo, args.pr, token).then((response) => {
 			console.info('PR:', pr.number, logger(status));
 			if (status !== pullRequestStatus.MERGEABLE) {
 				process.exitCode = (process.exitCode ?? 0) + 1;
+			}
+			if (status === pullRequestStatus.STATUS_FAILURE || status === pullRequestStatus.STATUS_PENDING) {
+				const { failure, pending } = evaluateChecks(pr);
+
+				if (pending.length > 0) {
+					console.info(chalk.yellowBright(`Pending Checks (${pending.length}): ${pending.join(', ')}`));
+				}
+				if (failure.length > 0) {
+					console.info(chalk.redBright(`Failed Checks (${failure.length}): ${failure.join(', ')}`));
+				}
 			}
 		});
 	}
