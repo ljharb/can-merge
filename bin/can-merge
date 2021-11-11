@@ -11,9 +11,9 @@ const getSHA = require('../utils/getSHA');
 const runQuery = require('../utils/runQuery');
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
 const evaluateChecks = require('../utils/evaluateChecks');
-const logger = require('../utils/logger');
 const parsePullRequest = require('../utils/parsePullRequest');
 const pullRequestStatus = require('../utils/models/pullRequestStatus');
+const getMessage = require('../utils/getMessage');
 
 const {
 	GITHUB_TOKEN,
@@ -104,7 +104,7 @@ runQuery(args.pr, String(args.repo), args.sha, token).then((response) => {
 	} else {
 		prs.forEach((pr) => {
 			const status = evaluatePullRequest(pr);
-			console.info('PR:', pr.number, logger(status));
+			console.info('PR:', pr.number, getMessage(status));
 			if (status !== pullRequestStatus.MERGEABLE) {
 				process.exitCode = (process.exitCode ?? 0) + 1;
 			}

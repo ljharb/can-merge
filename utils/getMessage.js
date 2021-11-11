@@ -15,6 +15,6 @@ const messages = {
 	[pullRequestStatus.STATUSCHECK_PENDING]: chalk.yellowBright(pullRequestStatus.STATUSCHECK_PENDING),
 };
 
-module.exports = function logger(response) {
+module.exports = function getMessage(response) {
 	return messages[response] || messages[pullRequestStatus.MERGEABLE];
 };
