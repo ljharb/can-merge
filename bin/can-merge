@@ -93,7 +93,7 @@ const args = Yargs
 
 const token = args.token || GITHUB_TOKEN || GH_TOKEN;
 
-runQuery(args.pr, String(args.repo), args.sha, token).then((response) => {
+function outputStatus(response) {
 	if (NODE_ENV === 'DEBUG') {
 		console.log(JSON.stringify(response, null, 2));
 	}
@@ -120,5 +120,8 @@ runQuery(args.pr, String(args.repo), args.sha, token).then((response) => {
 			}
 		});
 	}
-});
+}
 
+runQuery(args.pr, String(args.repo), args.sha, token).then((response) => {
+	outputStatus(response);
+});
