@@ -847,31 +847,27 @@ const mockParsePR = [
 			branchProtectionRules: {
 				nodes: [],
 			},
-			pullRequests: {
-				nodes: [
-					{
-						state: 'OPEN',
-						url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
-						title: 'dummy PR',
-						number: 1,
-						merged: false,
-						mergeable: 'MERGEABLE',
-						reviewDecision: null,
-						potentialMergeCommit: {
-							commitUrl:
-								'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
+			pullRequest: {
+				state: 'OPEN',
+				url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
+				title: 'dummy PR',
+				number: 1,
+				merged: false,
+				mergeable: 'MERGEABLE',
+				reviewDecision: null,
+				potentialMergeCommit: {
+					commitUrl:
+						'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
+				},
+				commits: {
+					nodes: [
+						{
+							commit: {
+								statusCheckRollup: null,
+							},
 						},
-						commits: {
-							nodes: [
-								{
-									commit: {
-										statusCheckRollup: null,
-									},
-								},
-							],
-						},
-					},
-				],
+					],
+				},
 			},
 		},
 		rateLimit: {
@@ -911,75 +907,89 @@ const mockParsePR = [
 			branchProtectionRules: {
 				nodes: [],
 			},
-			pullRequests: {
-				nodes: [
-					{
-						state: 'OPEN',
-						url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
-						title: 'dummy PR',
-						number: 1,
-						merged: false,
-						mergeable: 'MERGEABLE',
-						reviewDecision: null,
-						potentialMergeCommit: {
-							commitUrl:
-								'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
-						},
-						commits: {
-							nodes: [
+			commit: {
+				associatedPullRequests: {
+					edges: [
+						{
+							node: [
 								{
-									commit: {
-										statusCheckRollup: null,
+									state: 'OPEN',
+									url: 'https://github.com/MeghalBisht/dummy-repo/pull/1',
+									title: 'dummy PR',
+									number: 1,
+									merged: false,
+									mergeable: 'MERGEABLE',
+									reviewDecision: null,
+									potentialMergeCommit: {
+										commitUrl:
+											'https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7',
+									},
+									commits: {
+										nodes: [
+											{
+												commit: {
+													statusCheckRollup: null,
+												},
+											},
+										],
 									},
 								},
 							],
 						},
-					},
-					{
-						state: 'OPEN',
-						url: 'https://github.com/MeghalBisht/dummy-repo/pull/2',
-						title: 'dummy PR 2',
-						number: 2,
-						merged: false,
-						mergeable: 'MERGEABLE',
-						reviewDecision: null,
-						potentialMergeCommit: {
-							commitUrl:
-								'https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d',
-						},
-						commits: {
-							nodes: [
+						{
+							node: [
 								{
-									commit: {
-										statusCheckRollup: null,
+									state: 'OPEN',
+									url: 'https://github.com/MeghalBisht/dummy-repo/pull/2',
+									title: 'dummy PR 2',
+									number: 2,
+									merged: false,
+									mergeable: 'MERGEABLE',
+									reviewDecision: null,
+									potentialMergeCommit: {
+										commitUrl:
+											'https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d',
+									},
+									commits: {
+										nodes: [
+											{
+												commit: {
+													statusCheckRollup: null,
+												},
+											},
+										],
 									},
 								},
 							],
 						},
-					},
-					{
-						state: 'OPEN',
-						url: 'https://github.com/MeghalBisht/dummy-repo/pull/3',
-						title: 'dummy PR 3',
-						number: 3,
-						merged: false,
-						mergeable: 'MERGEABLE',
-						reviewDecision: null,
-						potentialMergeCommit: {
-							commitUrl:
-								'https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1',
-						},
-						commits: {
-							nodes: [
+						{
+							node: [
 								{
-									commit: {
-										statusCheckRollup: null,
+									state: 'OPEN',
+									url: 'https://github.com/MeghalBisht/dummy-repo/pull/3',
+									title: 'dummy PR 3',
+									number: 3,
+									merged: false,
+									mergeable: 'MERGEABLE',
+									reviewDecision: null,
+									potentialMergeCommit: {
+										commitUrl:
+											'https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1',
+									},
+									commits: {
+										nodes: [
+											{
+												commit: {
+													statusCheckRollup: null,
+												},
+											},
+										],
 									},
 								},
 							],
 						},
-					},
-				],
+					],
+				},
 			},
 		},
 		rateLimit: {

@@ -42,7 +42,12 @@ const pullRequestQuery = () => `
         }
 `;
 
-module.exports = function buildQuery(owner, name, pr) {
+module.exports = function buildQuery({
+	name,
+	owner,
+	pr,
+	sha,
+}) {
 	return `
       {
         repository(owner: "${owner}", name: "${name}") {
@@ -55,6 +60,16 @@ module.exports = function buildQuery(owner, name, pr) {
           }
           ${pr ? `pullRequest(number: ${pr}) {
             ${pullRequestQuery()}
+          }` : sha ? `commit: object(expression: "${sha}") {
+            ... on Commit {
+                associatedPullRequests(first:50){
+                  edges{
+                    node{
+                      ${pullRequestQuery()}
+                    }
+                  }
+                }
+            }
           }` : `pullRequests(first: 100) {
             nodes {
               ${pullRequestQuery()}

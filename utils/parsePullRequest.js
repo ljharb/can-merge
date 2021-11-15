@@ -1,5 +1,10 @@
+/* eslint-disable max-len */
+/* eslint-disable operator-linebreak */
+
 'use strict';
 
 module.exports = function parsePullRequest(response) {
-	return [].concat(response.pullRequest ? response.pullRequest : response.pullRequests?.nodes || []);
+	return response.pullRequest
+		? [response.pullRequest]
+		: response.commit?.associatedPullRequests.edges.flatMap(({ node }) => node) || response.pullRequests?.nodes || [];
 };
