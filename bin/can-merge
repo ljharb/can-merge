@@ -18,6 +18,8 @@ const parsePullRequest = require('../utils/parsePullRequest');
 const parseRemoteUrl = require('../utils/parseRemoteUrl');
 const pullRequestStatus = require('../utils/models/pullRequestStatus');
 const getMessage = require('../utils/getMessage');
+const evaluateCommitStatus = require('../utils/evaluateCommitStatus');
+const commitStatus = require('../utils/models/commitStatus');
 
 const {
 	GITHUB_TOKEN,
@@ -35,6 +37,13 @@ const args = Yargs
 	.help()
 	.strict()
 	.options({
+		commit: {
+			alias: 'c',
+			default: false,
+			demandOption: false,
+			describe: 'check commit status',
+			type: 'boolean',
+		},
 		pr: {
 			alias: 'p',
 			demandOption: false,
@@ -72,7 +81,6 @@ const args = Yargs
 		},
 		watch: {
 			alias: 'w',
-			default: false,
 			describe: 'watch pending checks',
 			type: 'boolean',
 		},
@@ -110,22 +118,33 @@ const args = Yargs
 
 const token = args.token || GITHUB_TOKEN || GH_TOKEN;
 
+// eslint-disable-next-line max-lines-per-function
 function outputStatus(response) {
 	if (NODE_ENV === 'DEBUG') {
 		console.log(JSON.stringify(response, null, 2));
 	}
+	if (args.commit) {
+		if (response.repository.commit === null) {
+			console.info(chalk.redBright(`⚠ This remote repository does not contain any commits matching sha: ${args.sha}`));
+		} else {
+			const status = evaluateCommitStatus(response.repository.commit);
+			console.info(getMessage(status));
+			if (status !== commitStatus.STATUS_SUCCESS) {
+				process.exitCode = (process.exitCode ?? 0) + 1;
+			}
+		}
+	}
 	const prs = parsePullRequest(response);
-	if (prs.length === 0) {
+	if (prs.length === 0 && !args.commit) {
 		if (args.pr) {
 			console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching number: ${args.pr}`));
 		} else {
 			console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching sha: ${args.sha}`));
 		}
-		process.exitCode = 1;
 	} else {
 		prs.forEach((pr) => {
 			const status = evaluatePullRequest(pr);
-			console.info('PR:', pr.number, getMessage(status));
+			console.info('PR status:', pr.number, getMessage(status));
 			if (status !== pullRequestStatus.MERGEABLE) {
 				process.exitCode = (process.exitCode ?? 0) + 1;
 			}
@@ -152,6 +171,7 @@ const options = {
 
 https.request(options, (response) => {
 	const params = {
+		commit: args.commit,
 		repo: parseRemoteUrl(response.headers?.location) ?? String(repo),
 		pr,
 		sha: pr ? null : sha,

@@ -5,9 +5,9 @@ const evaluatePending = require('../utils/evaluatePending');
 module.exports = async function watch(retryDelay, getResponse) {
 	const response = await getResponse();
 
-	const pendingChecks = evaluatePending(response);
+	const isPendingChecks = evaluatePending(response);
 
-	if (pendingChecks === 0) {
+	if (!isPendingChecks) {
 		return response;
 	}
 
