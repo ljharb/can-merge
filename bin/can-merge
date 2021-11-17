@@ -41,7 +41,7 @@ const args = Yargs
 		},
 		sha: {
 			alias: 's',
-			'default': getSHA(),
+			'default': getSHA(true),
 			describe: 'commit SHA',
 			type: 'string',
 		},
