@@ -1,7 +1,8 @@
 'use strict';
 
-const { execSync } = require('child_process');
+const getRepoInfo = require('git-repo-info');
 
 module.exports = function getSHA(short = false) {
-	return String(execSync(`git rev-parse${short ? ' --short' : ''} HEAD`)).trim();
+	const { sha, abbreviatedSha } = getRepoInfo();
+	return sha ? short ? abbreviatedSha : sha : null;
 };
