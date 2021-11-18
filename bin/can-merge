@@ -21,6 +21,11 @@ const {
 	NODE_ENV,
 } = process.env;
 
+const ORIGIN = Object('origin');
+
+const defaultRepo = getRepo();
+const REPO = defaultRepo && Object(defaultRepo);
+
 const args = Yargs
 	.usage('Usage: can-merge -p <pr> [-r <repo>]')
 	.help()
@@ -32,10 +37,16 @@ const args = Yargs
 			describe: 'pull request',
 			type: 'string',
 		},
+		remote: {
+			default: ORIGIN,
+			demandOption: false,
+			describe: 'remote name',
+			type: 'string',
+		},
 		repo: {
 			alias: 'r',
-			default: getRepo(),
-			demandOption: !getRepo(),
+			default: REPO,
+			demandOption: !REPO,
 			describe: 'repository',
 			type: 'string',
 		},
@@ -52,11 +63,37 @@ const args = Yargs
 			type: 'string',
 		},
 	})
+	.check((argv) => {
+		if (argv.repo !== REPO && argv.remote !== ORIGIN) {
+			throw chalk.red('`--repo` and `--remote` are mutually exclusive');
+		}
+		return true;
+	})
+	.middleware((argv) => {
+		if (argv.repo === REPO && argv.remote) {
+			// repo is default, remote is provided
+			return {
+				...argv,
+				...argv.remote && { repo: getRepo(argv.remote) },
+			};
+		}
+		return argv;
+	})
+	.check((argv) => {
+		if (!argv.repo) {
+			if (argv.remote !== ORIGIN) {
+				throw chalk.red(`Could not find remote git repo with remote name \`${argv.remote}\``);
+			}
+			throw chalk.red('Could not infer any git repository from directory.\nAre you sure you are in a git repository? Otherwise, please specify `--repo=`');
+		}
+
+		return true;
+	})
 	.parse();
 
 const token = args.token || GITHUB_TOKEN || GH_TOKEN;
 
-runQuery(args.pr, args.repo, args.sha, token).then((response) => {
+runQuery(args.pr, String(args.repo), args.sha, token).then((response) => {
 	if (NODE_ENV === 'DEBUG') {
 		console.log(JSON.stringify(response, null, 2));
 	}

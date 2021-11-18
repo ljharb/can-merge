@@ -3,4 +3,13 @@
 	"rules": {
 		"id-length": ["error", { "min": 1, "max": 64 }],
 	},
+
+	"overrides": [
+		{
+			"files": "bin/**",
+			"rules": {
+				"no-throw-literal": "off",
+			},
+		},
+	],
 }
