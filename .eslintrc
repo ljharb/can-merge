@@ -1,5 +1,5 @@
 {
-	"extends": ["@ljharb", "@ljharb/eslint-config/node/latest"],
+	"extends": ["@ljharb/eslint-config/node/latest"],
 	"rules": {
 		"id-length": ["error", { "min": 1, "max": 64 }],
 	},
