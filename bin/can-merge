@@ -34,14 +34,14 @@ const args = Yargs
 		},
 		repo: {
 			alias: 'r',
-			'default': getRepo(),
+			default: getRepo(),
 			demandOption: !getRepo(),
 			describe: 'repository',
 			type: 'string',
 		},
 		sha: {
 			alias: 's',
-			'default': getSHA(true),
+			default: getSHA(true),
 			describe: 'commit SHA',
 			type: 'string',
 		},
