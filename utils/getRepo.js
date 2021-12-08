@@ -1,13 +1,14 @@
 'use strict';
 
-const { execSync } = require('child_process');
 const isGitRepo = require('git-repo-info');
+const parse = require('parse-git-config');
 
 module.exports = function getRepo(remote = 'origin') {
-	if (isGitRepo().sha) {
-		const getRepos = String(execSync(`git ls-remote --get-url ${remote}`)).trim();
+	if (isGitRepo().commonGitDir) {
+		const config = parse.sync({ path: `${isGitRepo().commonGitDir}/config` });
+		const remoteUrl = parse.expandKeys(config)?.remote?.[remote]?.url;
 		const pushRepoRegex = /(?<=github\.com(?:\/|:))(?:.*)(?=\.git*)/gm;
-		return getRepos.match(pushRepoRegex)?.[0];
+		return remoteUrl?.match(pushRepoRegex)?.[0];
 	}
 	return null;
 };

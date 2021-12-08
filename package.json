@@ -43,6 +43,7 @@
 		"chalk": "^4.1.2",
 		"dotenv": "^10.0.0",
 		"git-repo-info": "^2.1.1",
+		"parse-git-config": "^3.0.0",
 		"yargs": "^17.3.0"
 	},
 	"engines": {
