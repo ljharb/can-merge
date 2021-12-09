@@ -17,7 +17,7 @@
 
 ## Installation
 
-The `can-merge` tool requires the latest [Node.js](https://nodejs.org/) version 12 or above. We **recommend** using `npx` to run `can-merge`.
+The `can-merge` tool requires the latest [Node.js](https://nodejs.org/) version 14 or above. We **recommend** using `npx` to run `can-merge`.
 
 ```sh
 npx can-merge
