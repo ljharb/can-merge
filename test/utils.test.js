@@ -4,6 +4,7 @@ const test = require('tape');
 
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
 const parsePullRequest = require('../utils/parsePullRequest');
+const getRepo = require('../utils/getRepo');
 
 const { mockEvalPR, mockParsePR } = require('./mocks');
 
@@ -20,5 +21,12 @@ test('parsePullRequest', (t) => {
 	mockParsePR.forEach((mock) => {
 		t.deepEqual(parsePullRequest(mock.repository), mock.expected, mock.description);
 	});
+	t.end();
+});
+
+test('getRepo', (t) => {
+	t.plan(2);
+	t.match(getRepo(), /[^/]+\/can-merge/);
+	t.looseEqual(getRepo('invalidvalue'), null);
 	t.end();
 });
