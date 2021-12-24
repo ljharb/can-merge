@@ -1,42 +1,45 @@
-/* eslint-disable no-underscore-dangle */
-
 'use strict';
 
-const parseChecks = (statusCheckRollup, name) => {
-	let pending = [];
-	let failure = [];
-	statusCheckRollup.contexts?.nodes?.forEach((node) => {
-		if (name === 'statusCheck') {
-			if (node.state === 'FAILURE' || node.state === 'ERROR') {
-				failure.push(node.context);
-			} else if (node.state === 'PENDING') {
-				pending.push(node.context);
-			}
-		} else if (name === 'checkRun') {
-			if (node.conclusion === 'FAILURE') {
-				failure.push(node.name);
-			} else if (node.status !== 'COMPLETED') {
-				pending.push(node.name);
-			}
+function parseStatusChecks(statusCheckRollup) {
+	const pending = [];
+	const failure = [];
+
+	statusCheckRollup.contexts?.nodes?.filter((node) => node.context).forEach((node) => {
+		if (node.state === 'FAILURE' || node.state === 'ERROR') {
+			failure.push(node.context);
+		} else if (node.state === 'PENDING') {
+			pending.push(node.context);
 		}
 	});
-	pending = pending.filter(Boolean);
-	failure = failure.filter(Boolean);
+
 	return { failure, pending };
-};
+}
+
+function parseCheckRuns(statusCheckRollup) {
+	const pending = [];
+	const failure = [];
+
+	statusCheckRollup.contexts?.nodes?.filter((node) => node.name).forEach((node) => {
+		if (node.conclusion === 'FAILURE') {
+			failure.push(node.name);
+		} else if (node.status !== 'COMPLETED') {
+			pending.push(node.name);
+		}
+	});
+
+	return { failure, pending };
+}
 
 module.exports = function evaluateChecks(pullRequest) {
 	const { commits: { nodes: [{ commit: { statusCheckRollup } }] } } = pullRequest;
 
 	for (const ctx of statusCheckRollup.contexts.nodes) {
+		/* eslint no-underscore-dangle: 0 */
 		if (ctx.__typename === 'StatusContext' && ctx.state !== 'SUCCESS') {
-			const { failure, pending } = parseChecks(statusCheckRollup, 'statusCheck');
-			return { failure, pending };
-		} else if (
-			ctx.__typename === 'CheckRun' && ctx.conclusion !== 'SUCCESS'
-		) {
-			const { failure, pending } = parseChecks(statusCheckRollup, 'checkRun');
-			return { failure, pending };
+			return parseStatusChecks(statusCheckRollup);
+		}
+		if (ctx.__typename === 'CheckRun' && ctx.conclusion !== 'SUCCESS') {
+			return parseCheckRuns(statusCheckRollup);
 		}
 	}
 
