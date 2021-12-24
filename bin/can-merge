@@ -122,6 +122,9 @@ function outputStatus(response) {
 	}
 }
 
-runQuery(args.pr, String(args.repo), args.sha, token).then((response) => {
+const { repo, pr, sha } = args;
+const params = { repo: String(repo), pr, sha, token };
+
+runQuery(params).then((response) => {
 	outputStatus(response);
 });
