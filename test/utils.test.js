@@ -7,7 +7,8 @@ const parsePullRequest = require('../utils/parsePullRequest');
 const getRepo = require('../utils/getRepo');
 const getSHA = require('../utils/getSHA');
 
-const { mockEvalPR, mockParsePR } = require('./mocks');
+const mockEvalPR = require('./mocks/evalPR');
+const mockParsePR = require('./mocks/parsePR.json');
 
 test('evaluatePullRequest', (t) => {
 	mockEvalPR.forEach((mock) => {
