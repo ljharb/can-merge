@@ -23,7 +23,7 @@ const {
 
 const ORIGIN = Object('origin');
 
-const defaultRepo = getRepo();
+const defaultRepo = getRepo(process.cwd());
 const REPO = defaultRepo && Object(defaultRepo);
 
 const args = Yargs
@@ -52,7 +52,7 @@ const args = Yargs
 		},
 		sha: {
 			alias: 's',
-			default: getSHA(true),
+			default: getSHA(process.cwd(), true),
 			describe: 'commit SHA',
 			type: 'string',
 		},
@@ -74,7 +74,7 @@ const args = Yargs
 			// repo is default, remote is provided
 			return {
 				...argv,
-				...argv.remote && { repo: getRepo(argv.remote) },
+				...argv.remote && { repo: getRepo(process.cwd(), argv.remote) },
 			};
 		}
 		return argv;

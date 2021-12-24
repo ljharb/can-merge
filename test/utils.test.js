@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const test = require('tape');
 
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
@@ -26,16 +27,19 @@ test('parsePullRequest', (t) => {
 	t.end();
 });
 
+const root = path.join(__dirname, '..');
+
 test('getRepo', (t) => {
-	t.match(getRepo(), /[^/]+\/can-merge/);
-	t.looseEqual(getRepo('invalidvalue'), null);
+	const repo = getRepo(root);
+	t.match(repo, /[^/]+\/can-merge/);
+	t.looseEqual(getRepo(root, 'invalidvalue'), null);
 
 	t.end();
 });
 
 test('getSHA', (t) => {
-	const long = getSHA();
-	const short = getSHA(true);
+	const long = getSHA(root);
+	const short = getSHA(root, true);
 	t.match(long, /^[a-zA-Z0-9]{40}$/);
 	t.match(short, /^[a-zA-Z0-9]{10}$/);
 	t.ok(long.startsWith(short), 'short SHA is a prefix of long SHA');
