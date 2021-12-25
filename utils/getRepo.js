@@ -8,7 +8,7 @@ module.exports = function getRepo(path = process.cwd(), remote = 'origin') {
 	if (commonGitDir) {
 		const config = parse.sync({ path: `${commonGitDir}/config` });
 		const remoteUrl = parse.expandKeys(config)?.remote?.[remote]?.url;
-		const pushRepoRegex = /github\.com[:/](?<repo>[^/\n]+\/[^/\n]+)(?:\.git|$)?/;
+		const pushRepoRegex = /github\.com[:/](?<repo>[^/\n]+\/[^/\n]+?)(?:\.git)?$/;
 		return remoteUrl?.match(pushRepoRegex)?.groups.repo;
 	}
 	return null;
