@@ -64,8 +64,7 @@ const args = Yargs
 			type: 'string',
 		},
 		token: {
-			alias: 't',
-			demandOption: !(GITHUB_TOKEN || GH_TOKEN),
+			demandOption: !(GH_TOKEN || GITHUB_TOKEN),
 			describe: 'github access token',
 			type: 'string',
 		},
