@@ -20,7 +20,7 @@ const iter = (iterable) => {
 
 test('evaluatePullRequest', (t) => {
 	mockEvalPR.forEach((mock) => {
-		t.equal(evaluatePullRequest(mock.res.repository.pullRequest), mock.expected, mock.description);
+		t.equal(evaluatePullRequest(mock.pullRequest), mock.expected, mock.description);
 	});
 
 	t.end();
@@ -28,7 +28,7 @@ test('evaluatePullRequest', (t) => {
 
 test('parsePullRequest', (t) => {
 	mockParsePR.forEach((mock) => {
-		t.deepEqual(parsePullRequest(mock.repository), mock.expected, mock.description);
+		t.deepEqual(parsePullRequest(mock.response), mock.expected, mock.description);
 	});
 
 	t.end();

@@ -50,36 +50,16 @@ module.exports = function buildQuery({
 }) {
 	return `
       {
-        repository(owner: "${owner}", name: "${name}") {
-          branchProtectionRules(first: 10) {
-            nodes {
-              requiresStatusChecks
-              requiredApprovingReviewCount
-              requiredStatusCheckContexts
+        search(query: "is:open is:pr repo:${owner}/${name} ${sha ? `sha:${sha}` : ''} ${pr ? `pr: ${pr}` : ''}", type:ISSUE, first: 100) {
+          issueCount
+          edges {
+            node {
+              ... on PullRequest {
+              ${pullRequestQuery()}
+              }
             }
           }
-          ${pr ? `pullRequest(number: ${pr}) {
-            ${pullRequestQuery()}
-          }` : sha ? `commit: object(expression: "${sha}") {
-            ... on Commit {
-                associatedPullRequests(first:50){
-                  edges{
-                    node{
-                      ${pullRequestQuery()}
-                    }
-                  }
-                }
-            }
-          }` : `pullRequests(first: 100) {
-            nodes {
-              ${pullRequestQuery()}
-            }
-          }`}
-        }
-        rateLimit {
-          cost
-          remaining
         }
       }
-    `;
+  `;
 };
