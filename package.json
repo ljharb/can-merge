@@ -29,7 +29,7 @@
 	"devDependencies": {
 		"@ljharb/eslint-config": "^20.1.0",
 		"aud": "^1.1.5",
-		"eslint": "^8.5.0",
+		"eslint": "^8.6.0",
 		"in-publish": "^2.0.1",
 		"nyc": "^15.1.0",
 		"object.fromentries": "^2.0.5",
