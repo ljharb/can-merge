@@ -12,7 +12,7 @@ const messages = {
 	[pullRequestStatus.REVIEW_DISAPPROVED]: chalk.yellowBright(pullRequestStatus.REVIEW_DISAPPROVED),
 	[pullRequestStatus.REVIEW_REQUIRED]: chalk.redBright(pullRequestStatus.REVIEW_REQUIRED),
 	[pullRequestStatus.STATUS_FAILURE]: chalk.blueBright(pullRequestStatus.STATUS_FAILURE),
-	[pullRequestStatus.STATUSCHECK_PENDING]: chalk.yellowBright(pullRequestStatus.STATUSCHECK_PENDING),
+	[pullRequestStatus.STATUS_PENDING]: chalk.yellowBright(pullRequestStatus.STATUS_PENDING),
 };
 
 module.exports = function getMessage(response) {
