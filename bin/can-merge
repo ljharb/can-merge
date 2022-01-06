@@ -76,12 +76,6 @@ const args = Yargs
 		},
 	})
 	.check((argv) => {
-		if (argv.watch && !argv.pr) {
-			throw new Error('Error: Must specify a pr to watch');
-		}
-		return true;
-	})
-	.check((argv) => {
 		if (argv.repo !== REPO && argv.remote !== ORIGIN) {
 			throw chalk.red('`--repo` and `--remote` are mutually exclusive');
 		}
@@ -103,6 +97,9 @@ const args = Yargs
 				throw chalk.red(`Could not find remote git repo with remote name \`${argv.remote}\``);
 			}
 			throw chalk.red('Could not infer any git repository from directory.\nAre you sure you are in a git repository? Otherwise, please specify `--repo=`');
+		}
+		if (argv.watch && !argv.sha && !argv.pr) {
+			throw chalk.red('Could not infer a PR or a SHA. Please specify a pull request to watch with `--pr`, or a commit with `--sha`');
 		}
 
 		return true;
