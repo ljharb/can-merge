@@ -50,7 +50,7 @@ module.exports = function buildQuery({
 }) {
 	return `
       {
-        search(query: "is:open is:pr repo:${owner}/${name} ${sha ? `sha:${sha}` : ''} ${pr ? `pr: ${pr}` : ''}", type:ISSUE, first: 100) {
+        search(query: "is:pr repo:${owner}/${name} ${sha ? `sha:${sha}` : ''} ${pr}", type:ISSUE, first: 100) {
           issueCount
           edges {
             node {

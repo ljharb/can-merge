@@ -114,7 +114,11 @@ function outputStatus(response) {
 	}
 	const prs = parsePullRequest(response);
 	if (prs.length === 0) {
-		console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching sha: ${args.sha}`));
+		if (args.pr) {
+			console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching number: ${args.pr}`));
+		} else {
+			console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching sha: ${args.sha}`));
+		}
 		process.exitCode = 1;
 	} else {
 		prs.forEach((pr) => {
@@ -138,7 +142,7 @@ function outputStatus(response) {
 }
 
 const { repo, pr, sha } = args;
-const params = { repo: String(repo), pr, sha, token };
+const params = { repo: String(repo), pr, sha: pr ? null : sha, token };
 
 if (args.watch) {
 	console.log('Waiting for all checks to complete ...\n');
