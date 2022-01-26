@@ -12,6 +12,7 @@ const watch = require('../utils/watch');
 const mockEvalPR = require('./mocks/evalPR');
 const mockParsePR = require('./mocks/parsePR.json');
 const mockWatchPR = require('./mocks/watchPR.json');
+const parseRemoteUrl = require('../utils/parseRemoteUrl');
 
 const iter = (iterable) => {
 	const it = iterable.values();
@@ -31,6 +32,14 @@ test('parsePullRequest', (t) => {
 		t.deepEqual(parsePullRequest(mock.response), mock.expected, mock.description);
 	});
 
+	t.end();
+});
+
+test('parseRemoteUrl', (t) => {
+	const result = 'ljharb/can-merge';
+	t.deepEqual(parseRemoteUrl('https://github.com/ljharb/can-merge.git'), result, 'parse https url');
+	t.deepEqual(parseRemoteUrl('http://github.com/ljharb/can-merge.git'), result, 'parse http url');
+	t.deepEqual(parseRemoteUrl('git@github.com/ljharb/can-merge.git'), result, 'parse git url');
 	t.end();
 });
 
