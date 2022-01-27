@@ -163,11 +163,11 @@ https.request(options, (response) => {
 		watch(args.retryDelay, () => runQuery(params)).then((res) => {
 			console.clear();
 			outputStatus(res);
-		});
+		}).catch((error) => { console.log(chalk.red(error)); });
 	} else {
 		runQuery(params).then((res) => {
 			outputStatus(res);
-		});
+		}).catch((error) => { console.log(chalk.red(error)); });
 	}
 }).on('error', (err) => {
 	console.error(err);
