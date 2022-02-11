@@ -144,7 +144,7 @@ function outputStatus(response) {
 	} else {
 		prs.forEach((pr) => {
 			const status = evaluatePullRequest(pr);
-			console.info('PR status:', pr.number, getMessage(status));
+			console.info(pr.url, 'by @'.concat(pr.author.login, ':'), pr.title, '\n', getMessage(status));
 			if (status !== pullRequestStatus.MERGEABLE) {
 				process.exitCode = (process.exitCode ?? 0) + 1;
 			}

@@ -12,6 +12,9 @@ const pullRequestQuery = (name, owner, pr, sha) => `
           state
           url
           title
+          author {
+            login
+          }
           number
           merged
           mergeable
