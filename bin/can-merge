@@ -14,12 +14,12 @@ const getSHA = require('../utils/getSHA');
 const runQuery = require('../utils/runQuery');
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
 const evaluateChecks = require('../utils/evaluateChecks');
-const parsePullRequest = require('../utils/parsePullRequest');
 const parseRemoteUrl = require('../utils/parseRemoteUrl');
 const pullRequestStatus = require('../utils/models/pullRequestStatus');
 const getMessage = require('../utils/getMessage');
 const evaluateCommitStatus = require('../utils/evaluateCommitStatus');
 const commitStatus = require('../utils/models/commitStatus');
+const filterPullRequest = require('../utils/filterPullRequest');
 
 const {
 	GITHUB_TOKEN,
@@ -118,7 +118,6 @@ const args = Yargs
 
 const token = args.token || GITHUB_TOKEN || GH_TOKEN;
 
-// eslint-disable-next-line max-lines-per-function
 function outputStatus(response) {
 	if (NODE_ENV === 'DEBUG') {
 		console.log(JSON.stringify(response, null, 2));
@@ -134,7 +133,9 @@ function outputStatus(response) {
 			}
 		}
 	}
-	const prs = parsePullRequest(response);
+
+	const prs = filterPullRequest(response, args.pr);
+
 	if (prs.length === 0 && !args.commit) {
 		if (args.pr) {
 			console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching number: ${args.pr}`));
@@ -182,11 +183,11 @@ https.request(options, (response) => {
 		console.log('Waiting for all checks to complete ...\n');
 		watch(args.retryDelay, () => runQuery(params)).then((res) => {
 			console.clear();
-			outputStatus(res);
+			outputStatus(res, args.pr);
 		}).catch((error) => { console.log(chalk.red(error)); });
 	} else {
 		runQuery(params).then((res) => {
-			outputStatus(res);
+			outputStatus(res, args.pr);
 		}).catch((error) => { console.log(chalk.red(error)); });
 	}
 }).on('error', (err) => {
