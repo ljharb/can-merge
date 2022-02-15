@@ -33,21 +33,29 @@ npm install -g can-merge
 
 ## Usage
 
+<!-- MD-MAGIC-EXAMPLE:START (CLI_REFERENCE) -->
 ```txt
 $ npx can-merge --help
-Usage: npx can-merge -p <pr> [-r <repo>]
+Usage: can-merge -p <pr> [-r <repo>]
 
 Options:
-      --help        Show help                                          [boolean]
       --version     Show version number                                [boolean]
-  -p, --pr          pull request                             [string] [required]
+      --help        Show help                                          [boolean]
+  -c, --commit      check commit status               [boolean] [default: false]
+  -p, --pr          pull request                                        [string]
+      --remote      remote name                     [string] [default: "origin"]
   -r, --repo        repository            [string] [default: "ljharb/can-merge"]
-  -s, --sha      commit SHA                           [string] [default: "HEAD"]
-  -t, --token       github access token                      [string] [required]
+      --retryDelay  delay before polling the api        [number] [default: 5000]
+  -s, --sha         commit SHA                        [string] [default: "HEAD"]
+      --token       github access token                      [string] [required]
+  -w, --watch       watch pending checks                               [boolean]
+
 ```
+<!-- MD-MAGIC-EXAMPLE:END -->
 
 **NOTE**:
-- Export your GitHub Personal Access Token and set it as `$GITHUB_TOKEN`, or pass it with the `-t` option.
+
+- Export your GitHub Personal Access Token and set it as `$GH_TOKEN` or `$GITHUB_TOKEN`, or pass it with the `-t` option.
 
 The `can-merge` tool will exit with a non-zero exit code if the pull request is not mergeable or blocked. It will exit with the exit code 0 if the pull request can be merged. You can use this tool with other scripts and tool to perform actions based on the exit code of this tool.
 
@@ -59,13 +67,17 @@ For example, you can use the `can-merge` tool to check if a pull request can be 
 
 Shows the usage information as in [Usage](#usage) section.
 
-### `--version`
+### `-c, --commit`
 
-Shows the semantic version number of the tool.
+Used to check the commit status.
 
 ### `-p, --pr`
 
 Used to specify the Pull Request number being used on [GitHub](https://github.com).
+
+### `--remote`
+
+Used to specify the remote to check.
 
 ### `-r, --repo`
 
@@ -75,21 +87,17 @@ Used to specify the repository if there is no GitHub remote configured or if it 
 
 Specify the [commit-ish](https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefcommit-ishacommit-ishalsocommittish) to be used. Defaults to the current SHA.
 
-<!--
 ### `--retryDelay`
 
- Used to specify the delay before polling the GitHub API for checking if the state of status checks have changed. To be used along with the `-w, --watch` option.
--->
+Used to specify the delay before polling the GitHub API for checking if the state of status checks have changed. To be used along with the `-w, --watch` option.
 
 ### `-t, --token`
 
 Used to specify the GitHub Personal Access Token needed to authenticate queries to the GitHub API.
 
-<!--
 ### `-w, --watch`
 
 Used to specify if the tool should keep polling for changes in the status checks untill all of them have completed.
--->
 
 ## License
 
