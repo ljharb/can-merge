@@ -4,6 +4,7 @@ const path = require('path');
 const test = require('tape');
 
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
+const filterPullRequest = require('../utils/filterPullRequest');
 const parsePullRequest = require('../utils/parsePullRequest');
 const getRepo = require('../utils/getRepo');
 const getSHA = require('../utils/getSHA');
@@ -11,6 +12,7 @@ const watch = require('../utils/watch');
 
 const mockEvalPR = require('./mocks/evalPR');
 const mockParsePR = require('./mocks/parsePR.json');
+const mockFilterPR = require('./mocks/filterPR.json');
 const mockWatchPR = require('./mocks/watchPR.json');
 const parseRemoteUrl = require('../utils/parseRemoteUrl');
 
@@ -68,4 +70,12 @@ test('watchPR', async (t) => {
 		const result = await watch(5e3, iter(mock.responses)); // eslint-disable-line no-await-in-loop
 		t.equals(mock.responses[mock.responses.length - 1], result, mock.description);
 	}
+});
+
+test('filterPullRequest', (t) => {
+	mockFilterPR.forEach((mock) => {
+		t.deepEqual(filterPullRequest(mock.response, mock.argPr), mock.expected, mock.description);
+	});
+
+	t.end();
 });
