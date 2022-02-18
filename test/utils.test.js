@@ -5,11 +5,13 @@ const test = require('tape');
 
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
 const filterPullRequest = require('../utils/filterPullRequest');
+const evaluateCommitStatus = require('../utils/evaluateCommitStatus');
 const parsePullRequest = require('../utils/parsePullRequest');
 const getRepo = require('../utils/getRepo');
 const getSHA = require('../utils/getSHA');
 const watch = require('../utils/watch');
 
+const mockCommitPR = require('./mocks/evalCommit');
 const mockEvalPR = require('./mocks/evalPR');
 const mockParsePR = require('./mocks/parsePR.json');
 const mockFilterPR = require('./mocks/filterPR.json');
@@ -24,6 +26,18 @@ const iter = (iterable) => {
 test('evaluatePullRequest', (t) => {
 	mockEvalPR.forEach((mock) => {
 		t.equal(evaluatePullRequest(mock.pullRequest), mock.expected, mock.description);
+	});
+
+	t.end();
+});
+
+test('evaluateCommitStatus', (t) => {
+	mockCommitPR.forEach((mock) => {
+		t.equal(
+			evaluateCommitStatus(mock.commitStatus),
+			mock.expected,
+			mock.description,
+		);
 	});
 
 	t.end();
