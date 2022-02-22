@@ -70,7 +70,7 @@ const args = Yargs
 		},
 		sha: {
 			alias: 's',
-			default: getSHA(process.cwd(), true),
+			default: 'HEAD',
 			describe: 'commit SHA',
 			type: 'string',
 		},
@@ -90,6 +90,15 @@ const args = Yargs
 			throw chalk.red('`--repo` and `--remote` are mutually exclusive');
 		}
 		return true;
+	})
+	.middleware((argv) => {
+		if (argv.sha === 'HEAD') {
+			return {
+				...argv,
+				sha: getSHA(process.cwd(), true),
+			};
+		}
+		return argv;
 	})
 	.middleware((argv) => {
 		if (argv.repo === REPO && argv.remote) {
