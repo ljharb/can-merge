@@ -55,6 +55,12 @@ const pullRequestQuery = (name, owner, pr, sha) => `
       }
     }
   }
+  rateLimit {
+    limit
+    cost
+    remaining
+    resetAt
+  }
 `;
 
 const commitStatusQuery = (name, owner, sha) => `
