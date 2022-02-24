@@ -169,6 +169,7 @@ function outputStatus(response) {
 			}
 		});
 	}
+	console.error(`API Points: used - ${response.rateLimit.cost}\tremaining - ${response.rateLimit.remaining}`);
 }
 const { repo, pr, sha } = args;
 
