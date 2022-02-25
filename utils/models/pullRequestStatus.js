@@ -10,4 +10,4 @@ module.exports = {
 	REVIEW_REQUIRED: 'ℹ This PR requires a review - merging is blocked',
 	STATUS_FAILURE: '⚠ Some status checks are not successful',
 	STATUS_PENDING: 'ℹ Some status checks are pending',
-};
+}
