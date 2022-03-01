@@ -12,7 +12,7 @@ module.exports = async function watch(retryDelay, getResponse) {
 	}
 
 	setTimeout(() => {
-		process.stdout.write('.');
+		process.stderr.write('.');
 	}, retryDelay);
 
 	return watch(retryDelay, getResponse);
