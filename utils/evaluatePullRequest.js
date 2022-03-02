@@ -34,7 +34,7 @@ module.exports = function evaluatePullRequest(response) {
 	const conclusion = getConclusionString(response);
 
 	if (conclusion !== 'SUCCESS' && conclusion !== 'FAILURE') {
-		if(conclusion === 'PENDING') {
+		if (conclusion === 'PENDING') {
 			return pullRequestStatus.STATUS_PENDING;
 		}
 	} else if (conclusion) {
