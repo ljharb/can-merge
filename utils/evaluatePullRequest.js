@@ -32,10 +32,8 @@ module.exports = function evaluatePullRequest(response) {
 	}
 
 	const conclusion = getConclusionString(response);
-	if (conclusion !== 'SUCCESS' && conclusion !== 'FAILURE') {
-		if (conclusion === 'PENDING') {
-			return pullRequestStatus.STATUS_PENDING;
-		}
+	if ((conclusion !== 'SUCCESS' && conclusion !== 'FAILURE') && conclusion === 'PENDING') {
+		return pullRequestStatus.STATUS_PENDING;
 	} else if (conclusion) {
 		const { commits: { nodes: [{ commit: { statusCheckRollup } }] } } = response;
 
@@ -60,6 +58,8 @@ module.exports = function evaluatePullRequest(response) {
 		return pullRequestStatus.REVIEW_DISAPPROVED;
 	} else if (reviewDecision === 'REVIEW_REQUIRED') {
 		return pullRequestStatus.REVIEW_REQUIRED;
+	}else if (reviewDecision === 'PENDING') {
+		return pullRequestStatus.STATUS_PENDING;
 	}
 
 	return pullRequestStatus.MERGEABLE;
