@@ -129,7 +129,7 @@ const token = args.token || GITHUB_TOKEN || GH_TOKEN;
 
 function outputStatus(response) {
 	if (NODE_ENV === 'DEBUG') {
-		console.log(JSON.stringify(response, null, 2));
+		console.error(JSON.stringify(response, null, 2));
 	}
 	if (args.commit) {
 		if (response.repository.commit === null) {
@@ -189,7 +189,7 @@ https.request(options, (response) => {
 	};
 
 	if (args.watch) {
-		console.log('Waiting for all checks to complete ...\n');
+		console.error('Waiting for all checks to complete ...\n');
 		watch(args.retryDelay, () => runQuery(params)).then((res) => {
 			console.clear();
 			outputStatus(res, args.pr);
