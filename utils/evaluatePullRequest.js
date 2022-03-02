@@ -56,7 +56,6 @@ module.exports = function evaluatePullRequest(response) {
 			}
 		}
 	}
-	
 	if (reviewDecision === 'CHANGES_REQUESTED') {
 		return pullRequestStatus.REVIEW_DISAPPROVED;
 	} else if (reviewDecision === 'REVIEW_REQUIRED') {
