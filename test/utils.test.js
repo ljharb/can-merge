@@ -43,7 +43,7 @@ test('evaluateCommitStatus', (t) => {
 	t.end();
 });
 test('evaluatePullRequest', (t) => {
-	mockEvalPR.forEach((mock) => {
+	mockCommitPR.forEach((mock) => {
 		t.equal(
 			evaluatePullRequest(mock.pullRequestStatus),
 			mock.expected,
