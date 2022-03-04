@@ -32,6 +32,7 @@ module.exports = function evaluatePullRequest(response) {
 	}
 
 	const conclusion = getConclusionString(response);
+
 	if (conclusion !== 'SUCCESS' && conclusion !== 'FAILURE') {
 		if (conclusion === 'PENDING') {
 			return pullRequestStatus.STATUS_PENDING;
@@ -55,11 +56,12 @@ module.exports = function evaluatePullRequest(response) {
 			}
 		}
 	}
-
 	if (reviewDecision === 'CHANGES_REQUESTED') {
 		return pullRequestStatus.REVIEW_DISAPPROVED;
 	} else if (reviewDecision === 'REVIEW_REQUIRED') {
 		return pullRequestStatus.REVIEW_REQUIRED;
+	} else if (reviewDecision === 'PENDING') {
+		return pullRequestStatus.STATUS_PENDING;
 	}
 
 	return pullRequestStatus.MERGEABLE;
