@@ -42,7 +42,17 @@ test('evaluateCommitStatus', (t) => {
 
 	t.end();
 });
+test('evaluatePullRequest', (t) => {
+	mockEvalPR.forEach((mock) => {
+		t.equal(
+			evaluatePullRequest(mock.pullRequestStatus),
+			mock.expected,
+			mock.description,
+		);
+	});
 
+	t.end();
+});
 test('parsePullRequest', (t) => {
 	mockParsePR.forEach((mock) => {
 		t.deepEqual(parsePullRequest(mock.response), mock.expected, mock.description);
