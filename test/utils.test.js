@@ -6,7 +6,6 @@ const test = require('tape');
 const evaluatePullRequest = require('../utils/evaluatePullRequest');
 const filterPullRequest = require('../utils/filterPullRequest');
 const evaluateCommitStatus = require('../utils/evaluateCommitStatus');
-const evaluatePullRequestStatus =require('../utils/evaluatePullRequestStatus');
 const parsePullRequest = require('../utils/parsePullRequest');
 const getRepo = require('../utils/getRepo');
 const getSHA = require('../utils/getSHA');
@@ -44,17 +43,6 @@ test('evaluateCommitStatus', (t) => {
 	t.end();
 });
 
-test('evaluatePullRequestStatus', (t) => {
-	mockCommitPR.forEach((mock) => {
-		t.equal(
-			evaluateCommitStatus(mock.pullRequestStatus),
-			mock.expected,
-			mock.description,
-		);
-	});
-
-	t.end();
-});
 test('parsePullRequest', (t) => {
 	mockParsePR.forEach((mock) => {
 		t.deepEqual(parsePullRequest(mock.response), mock.expected, mock.description);
