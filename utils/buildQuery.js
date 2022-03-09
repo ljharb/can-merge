@@ -15,6 +15,7 @@ const pullRequestQuery = (name, owner, pr, sha) => `
           author {
             login
           }
+           viewerCanMergeAsAdmin
           number
           merged
           mergeable

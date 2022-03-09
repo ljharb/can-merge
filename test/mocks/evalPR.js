@@ -718,5 +718,67 @@ module.exports = [
 		},
 		"expected": pullRequestStatus.MERGEABLE,
 		"description": "evaluation of a PR with SUCCESS should return MERGEABLE"
+	},
+	{
+		"pullRequest": {
+			"state": "OPEN",
+			"url": "https://github.com/Common1818/branchProtection/pull/1",
+			"title": "Sample pr",
+			"author": {
+				"login": "Kartik18g"
+			},
+			"viewerCanMergeAsAdmin": true,
+			"number": 1,
+			"merged": false,
+			"mergeable": "MERGEABLE",
+			"reviewDecision": "REVIEW_REQUIRED",
+			"potentialMergeCommit": {
+				"commitUrl":
+					"https://github.com/Common1818/branchProtection/commit/b829099bdc69e4b84f04be23a8c67ebdcfbc9d26"
+			},
+			"commits": {
+				"nodes": [
+					{
+						"commit": {
+							"statusCheckRollup": null
+						}
+					}
+				]
+			}
+		},
+		"expected": pullRequestStatus.BYPASSABLE,
+		"description":
+			"evaluation of a PR which requires review but as an admin with merge rights should return BYPASSABLE"
+	},
+	{
+		"pullRequest": {
+			"state": "OPEN",
+			"url": "https://github.com/Common1818/branchProtection/pull/1",
+			"title": "Sample pr",
+			"author": {
+				"login": "Kartik18g"
+			},
+			"viewerCanMergeAsAdmin": false,
+			"number": 1,
+			"merged": false,
+			"mergeable": "MERGEABLE",
+			"reviewDecision": "REVIEW_REQUIRED",
+			"potentialMergeCommit": {
+				"commitUrl":
+					"https://github.com/Common1818/branchProtection/commit/b829099bdc69e4b84f04be23a8c67ebdcfbc9d26"
+			},
+			"commits": {
+				"nodes": [
+					{
+						"commit": {
+							"statusCheckRollup": null
+						}
+					}
+				]
+			}
+		},
+		"expected": pullRequestStatus.REVIEW_REQUIRED,
+		"description":
+			"evaluation of a PR which requires review but if not an admin with merge rights you return REVIEW_REQUIRED"
 	}
 ];
