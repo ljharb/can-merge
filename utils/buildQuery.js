@@ -12,6 +12,13 @@ const pullRequestQuery = (name, owner, pr, sha) => `
 					state
 					url
 					title
+					baseRef {
+						name
+						branchProtectionRule {
+							isAdminEnforced
+							requiredStatusCheckContexts
+						}
+					}
 					author {
 						login
 					}
@@ -39,9 +46,11 @@ const pullRequestQuery = (name, owner, pr, sha) => `
 											... on CheckRun {
 												status
 												name
+												${pr ? `isRequired(pullRequestNumber: ${pr})` : ''}
 												conclusion
 											}
 											... on StatusContext {
+												${pr ? `isRequired(pullRequestNumber: ${pr})` : ''}
 												state
 												context
 												description
