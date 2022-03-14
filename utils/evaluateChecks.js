@@ -33,13 +33,15 @@ function parseCheckRuns(statusCheckRollup) {
 module.exports = function evaluateChecks(pullRequest) {
 	const { commits: { nodes: [{ commit: { statusCheckRollup } }] } } = pullRequest;
 
-	for (const ctx of statusCheckRollup.contexts.nodes) {
-		/* eslint no-underscore-dangle: 0 */
-		if (ctx.__typename === 'StatusContext' && ctx.state !== 'SUCCESS') {
-			return parseStatusChecks(statusCheckRollup);
-		}
-		if (ctx.__typename === 'CheckRun' && ctx.conclusion !== 'SUCCESS') {
-			return parseCheckRuns(statusCheckRollup);
+	if (statusCheckRollup?.contexts?.nodes) {
+		for (const ctx of statusCheckRollup.contexts.nodes) {
+			/* eslint no-underscore-dangle: 0 */
+			if (ctx.__typename === 'StatusContext' && ctx.state !== 'SUCCESS') {
+				return parseStatusChecks(statusCheckRollup);
+			}
+			if (ctx.__typename === 'CheckRun' && ctx.conclusion !== 'SUCCESS') {
+				return parseCheckRuns(statusCheckRollup);
+			}
 		}
 	}
 
