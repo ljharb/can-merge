@@ -34,7 +34,8 @@ module.exports = [
 											"__typename": "StatusContext",
 											"state": "FAILURE",
 											"context": "ci/circleci: get_base_build",
-											"description": "Your tests failed on CircleCI"
+											"description": "Your tests failed on CircleCI",
+											"isRequired": true
 										},
 										{
 											"__typename": "StatusContext",
@@ -268,205 +269,36 @@ module.exports = [
 											"__typename": "StatusContext",
 											"state": "PENDING",
 											"context": "ci/circleci: sync_reconciler_forks",
-											"description": "CircleCI is running your tests"
+											"description": "CircleCI is running your tests",
+											"isRequired": true
 										},
 										{
 											"__typename": "StatusContext",
 											"state": "PENDING",
 											"context": "ci/circleci: yarn_test--r=www-classic --env=development --variant=true",
-											"description": "CircleCI is running your tests"
+											"description": "CircleCI is running your tests",
+											"isRequired": true
 										},
 										{
 											"__typename": "CheckRun",
 											"status": "COMPLETED",
 											"name": "Facebook CLA Check",
-											"conclusion": "SUCCESS"
+											"conclusion": "SUCCESS",
+											"isRequired": true
 										},
 										{
 											"__typename": "StatusContext",
 											"state": "SUCCESS",
 											"context": "ci/circleci: RELEASE_CHANNEL_stable_yarn_build",
-											"description": "Your tests passed on CircleCI!"
+											"description": "Your tests passed on CircleCI!",
+											"isRequired": true
 										},
 										{
 											"__typename": "StatusContext",
 											"state": "SUCCESS",
 											"context": "ci/circleci: RELEASE_CHANNEL_stable_yarn_test_dom_fixtures",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: build_devtools_and_process_artifacts",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: build_devtools_scheduling_profiler",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: get_base_build",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: process_artifacts_combined",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: setup",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: sizebot",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_build",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_build_combined",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_flow",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_lint",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_lint_build",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=experimental --env=development",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=experimental --env=production",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=stable --env=development",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=stable --env=development --persistent",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=stable --env=production",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=www-classic --env=development --variant=false",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=www-classic --env=production --variant=false",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=www-classic --env=production --variant=true",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=www-modern --env=development --variant=false",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=www-modern --env=development --variant=true",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=www-modern --env=production --variant=false",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test--r=www-modern --env=production --variant=true",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test_build---project=devtools -r=experimental",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test_build--r=experimental --env=development",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test_build--r=experimental --env=production",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test_build--r=stable --env=development",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/circleci: yarn_test_build--r=stable --env=production",
-											"description": "Your tests passed on CircleCI!"
-										},
-										{
-											"__typename": "StatusContext",
-											"state": "SUCCESS",
-											"context": "ci/codesandbox",
-											"description": "Building packages succeeded."
+											"description": "Your tests passed on CircleCI!",
+											"isRequired": true
 										}
 									]
 								}

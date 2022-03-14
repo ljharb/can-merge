@@ -1,46 +1,58 @@
 'use strict';
 
-function parseStatusChecks(statusCheckRollup) {
+function parseStatusChecks(statusCheckRollup, requiredChecks) {
 	const pending = [];
 	const failure = [];
 
 	statusCheckRollup.contexts?.nodes?.filter((node) => node.context).forEach((node) => {
 		if (node.state === 'FAILURE' || node.state === 'ERROR') {
-			failure.push(node.context);
+			failure.push({
+				name: node.context,
+				isRequired: requiredChecks?.includes(node.context) ?? !!node.isRequired,
+			});
 		} else if (node.state === 'PENDING') {
-			pending.push(node.context);
+			pending.push({
+				name: node.context,
+				isRequired: requiredChecks?.includes(node.context) ?? !!node.isRequired,
+			});
 		}
 	});
 
 	return { failure, pending };
 }
 
-function parseCheckRuns(statusCheckRollup) {
+function parseCheckRuns(statusCheckRollup, requiredChecks) {
 	const pending = [];
 	const failure = [];
 
 	statusCheckRollup.contexts?.nodes?.filter((node) => node.name).forEach((node) => {
 		if (node.conclusion === 'FAILURE') {
-			failure.push(node.name);
+			failure.push({
+				name: node.name,
+				isRequired: requiredChecks?.includes(node.name) ?? !!node.isRequired,
+			});
 		} else if (node.status !== 'COMPLETED') {
-			pending.push(node.name);
+			pending.push({
+				name: node.name,
+				isRequired: requiredChecks?.includes(node.name) ?? !!node.isRequired,
+			});
 		}
 	});
 
 	return { failure, pending };
 }
 
-module.exports = function evaluateChecks(pullRequest) {
+module.exports = function evaluateChecks(pullRequest, requiredChecks) {
 	const { commits: { nodes: [{ commit: { statusCheckRollup } }] } } = pullRequest;
 
 	if (statusCheckRollup?.contexts?.nodes) {
 		for (const ctx of statusCheckRollup.contexts.nodes) {
 			/* eslint no-underscore-dangle: 0 */
 			if (ctx.__typename === 'StatusContext' && ctx.state !== 'SUCCESS') {
-				return parseStatusChecks(statusCheckRollup);
+				return parseStatusChecks(statusCheckRollup, requiredChecks);
 			}
 			if (ctx.__typename === 'CheckRun' && ctx.conclusion !== 'SUCCESS') {
-				return parseCheckRuns(statusCheckRollup);
+				return parseCheckRuns(statusCheckRollup, requiredChecks);
 			}
 		}
 	}

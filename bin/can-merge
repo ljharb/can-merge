@@ -20,6 +20,7 @@ const evaluateCommitStatus = require('../utils/evaluateCommitStatus');
 const commitStatus = require('../utils/models/commitStatus');
 const filterPullRequest = require('../utils/filterPullRequest');
 const resolveIndentifier = require('../utils/resolveIndentifier');
+const getPRWithRequiredChecks = require('../utils/getPRWithRequiredChecks');
 
 const {
 	GITHUB_TOKEN,
@@ -133,7 +134,28 @@ const args = Yargs
 
 const token = args.token || GITHUB_TOKEN || GH_TOKEN;
 
-function outputStatus(response) {
+function displayChecks(checks) {
+	checks.forEach((p) => {
+		if (p.isRequired) {
+			console.info(chalk.red(`🔒 ${p.name}`));
+		} else {
+			console.info(chalk.yellow(`   ${p.name}`));
+		}
+	});
+}
+
+function outputChecks(failure, pending) {
+	if (pending.length > 0) {
+		console.info(chalk.red(`Pending Checks (${pending.length}):`));
+		displayChecks(pending);
+	}
+	if (failure.length > 0) {
+		console.info(chalk.red(`Failed Checks (${failure.length}):`));
+		displayChecks(failure);
+	}
+}
+
+function outputStatus(response, params) {
 	if (NODE_ENV === 'DEBUG') {
 		console.error(JSON.stringify(response, null, 2));
 	}
@@ -149,35 +171,31 @@ function outputStatus(response) {
 		}
 	}
 
-	const prs = filterPullRequest(response, args.pr);
-
-	if (prs.length === 0 && !args.commit) {
-		if (args.pr) {
-			console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching number: ${args.pr}`));
+	getPRWithRequiredChecks(filterPullRequest(response), params).then((prs) => {
+		if (prs.length === 0 && !args.commit) {
+			if (params.pr) {
+				console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching number: ${args.pr}`));
+			} else {
+				console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching sha: ${args.sha}`));
+			}
 		} else {
-			console.info(chalk.redBright(`⚠ This remote repository does not contain any pull requests matching sha: ${args.sha}`));
-		}
-	} else {
-		prs.forEach((pr) => {
-			const status = evaluatePullRequest(pr);
-			console.info(pr.url, 'by @'.concat(pr.author.login, ':'), pr.title, '\n', getMessage(status));
-			if (status !== pullRequestStatus.MERGEABLE) {
-				process.exitCode = (process.exitCode ?? 0) + 1;
-			}
-			if (status === pullRequestStatus.STATUS_FAILURE || status === pullRequestStatus.STATUS_PENDING) {
-				const { failure, pending } = evaluateChecks(pr);
+			prs.forEach((pr) => {
+				const requiredChecks = pr.baseRef?.branchProtectionRule?.requiredStatusCheckContexts;
+				const status = evaluatePullRequest(pr, requiredChecks);
+				console.info(pr.url, 'by @'.concat(pr.author.login, ':'), pr.title, '\n', getMessage(status), '\n');
+				if (status !== pullRequestStatus.MERGEABLE) {
+					process.exitCode = (process.exitCode ?? 0) + 1;
+				}
+				const { failure, pending } = evaluateChecks(pr, requiredChecks);
 
-				if (pending.length > 0) {
-					console.info(chalk.yellowBright(`Pending Checks (${pending.length}): ${pending.join(', ')}`));
-				}
-				if (failure.length > 0) {
-					console.info(chalk.redBright(`Failed Checks (${failure.length}): ${failure.join(', ')}`));
-				}
-			}
-		});
-	}
+				outputChecks(failure, pending);
+			});
+		}
+	});
+
 	console.error(`API Points: used - ${response.rateLimit.cost}\tremaining - ${response.rateLimit.remaining}`);
 }
+
 const { repo, pr, sha } = args;
 
 const options = {
@@ -199,11 +217,11 @@ https.request(options, (response) => {
 		console.error('Waiting for all checks to complete ...\n');
 		watch(args.retryDelay, () => runQuery(params)).then((res) => {
 			console.clear();
-			outputStatus(res, args.pr);
+			outputStatus(res, params);
 		}).catch((error) => { console.log(chalk.red(error)); });
 	} else {
 		runQuery(params).then((res) => {
-			outputStatus(res, args.pr);
+			outputStatus(res, params);
 		}).catch((error) => { console.log(chalk.red(error)); });
 	}
 }).on('error', (err) => {
