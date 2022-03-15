@@ -1,4 +1,5 @@
 'use strict';
+
 // const fs = require('fs');
 
 const { graphql } = require('@octokit/graphql');
@@ -14,18 +15,11 @@ module.exports = async function runQuery({ commit, repo, pr, sha, token }) {
 			},
 		});
 		console.log('hi');
-		console.log(response);
-		console.log(buildQuery({ commit, name, owner, pr, sha }));
-
-				// console.log('hi');
-				// console.log(response);
-				// const content = JSON.stringify(
-				// 	buildQuery({ commit, name, owner, pr, sha })
-				// );
-				// fs.writeFile('status.txt', content);
+		console.log(JSON.stringify(response));
 
 	} catch (err) {
 		throw err.message;
 	}
 	return response;
+
 };

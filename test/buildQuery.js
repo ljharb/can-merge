@@ -14,62 +14,71 @@ const buildQuery = require('../utils/buildQuery');
 
 test('New test - No Commit', (t) => {
 	const result = buildQuery('Name', 'Owner', 'feature_name', null, null);
-	const expected = `{
-  search(query: "is:pr repo:ljharb/can-merge sha:03e33a92ef undefined", type:ISSUE, first: 100) {
-    issueCount
-    edges {
-      node {
-        ... on PullRequest {
-          state
-          url
-          title
-          author {
-            login
-          }
-          number
-          merged
-          mergeable
-          reviewDecision
-          potentialMergeCommit {
-            commitUrl
-          }
-          commits(last: 1) {
-            nodes {
-              commit {
-                statusCheckRollup {
-                  state
-                  contexts(last: 100) {
-                    totalCount
-                    pageInfo {
-                      endCursor
-                      hasNextPage
-                    }
-                    nodes {
-                      __typename
-                      ... on CheckRun {
-                        status
-                        name
-                        conclusion
-                      }
-                      ... on StatusContext {
-                        state
-                        context
-                        description
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+  const expected = `{
+    "search": {
+    "issueCount": 0,
+    "edges": []
     }
-  }
-}`;
+  }`;
 	t.looseEqual(result, expected, 'should be the right info');
 	t.end();
 });
+
+/*
+ 	const expected = `{
+   search(query: "is:pr repo:ljharb/can-merge sha:03e33a92ef undefined", type:ISSUE, first: 100) {
+     issueCount
+     edges {
+       node {
+         ... on PullRequest {
+           state
+           url
+           title
+           author {
+             login
+           }
+           number
+           merged
+           mergeable
+           reviewDecision
+           potentialMergeCommit {
+             commitUrl
+           }
+           commits(last: 1) {
+             nodes {
+               commit {
+                 statusCheckRollup {
+                   state
+                   contexts(last: 100) {
+                     totalCount
+                     pageInfo {
+                       endCursor
+                       hasNextPage
+                     }
+                     nodes {
+                       __typename
+                       ... on CheckRun {
+                         status
+                         name
+                         conclusion
+                       }
+                       ... on StatusContext {
+                         state
+                         context
+                         description
+                       }
+                     }
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }`;
+ */
 
 /*
  * test('New test - Has Commit', (t) => {

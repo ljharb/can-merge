@@ -96,11 +96,12 @@ module.exports = function buildQuery({
 	sha,
 	commit,
 }) {
-	return `${commit
-		? `{
+	return `${
+		commit
+			? `{
           ${pullRequestQuery(name, owner, pr, sha)}
           ${commitStatusQuery(name, owner, sha)}
         }`
-		: `{${pullRequestQuery(name, owner, pr, sha)}}`
+			: `{${pullRequestQuery(name, owner, pr, sha)}}`
 	}`;
 };

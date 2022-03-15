@@ -5,6 +5,7 @@
 const Yargs = require('yargs');
 const chalk = require('chalk');
 const https = require('https');
+require('dotenv').config();
 
 const watch = require('../utils/watch');
 const getRepo = require('../utils/getRepo');
@@ -154,6 +155,8 @@ function outputStatus(response) {
 		prs.forEach((pr) => {
 			const status = evaluatePullRequest(pr);
 			console.info(pr.url, 'by @'.concat(pr.author.login, ':'), pr.title, '\n', getMessage(status));
+			console.log('hi');
+			console.log(getMessage(status));
 			if (status !== pullRequestStatus.MERGEABLE) {
 				process.exitCode = (process.exitCode ?? 0) + 1;
 			}
