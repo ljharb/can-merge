@@ -46,7 +46,7 @@ Options:
       --remote      remote name                     [string] [default: "origin"]
   -r, --repo        repository            [string] [default: "ljharb/can-merge"]
       --retryDelay  delay before polling the api        [number] [default: 5000]
-  -s, --sha         commit SHA                        [string] [default: "HEAD"]
+  -s, --sha         commit SHA, or any git commit-ish [string] [default: "HEAD"]
       --token       github access token                      [string] [required]
   -w, --watch       watch pending checks                               [boolean]
 

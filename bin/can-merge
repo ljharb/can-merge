@@ -19,6 +19,7 @@ const getMessage = require('../utils/getMessage');
 const evaluateCommitStatus = require('../utils/evaluateCommitStatus');
 const commitStatus = require('../utils/models/commitStatus');
 const filterPullRequest = require('../utils/filterPullRequest');
+const resolveIndentifier = require('../utils/resolveIndentifier');
 
 const {
 	GITHUB_TOKEN,
@@ -70,7 +71,7 @@ const args = Yargs
 		sha: {
 			alias: 's',
 			default: 'HEAD',
-			describe: 'commit SHA',
+			describe: 'commit SHA, or any git commit-ish',
 			type: 'string',
 		},
 		token: {
@@ -95,6 +96,12 @@ const args = Yargs
 			return {
 				...argv,
 				sha: getSHA(process.cwd(), true),
+			};
+		}
+		if (argv.sha) {
+			return {
+				...argv,
+				sha: resolveIndentifier(argv.sha, true),
 			};
 		}
 		return argv;
