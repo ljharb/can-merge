@@ -176,7 +176,7 @@ function outputStatus(response) {
 			}
 		});
 	}
-	console.error(`API Points: used - ${response.rateLimit.cost}\tremaining - ${response.rateLimit.remaining}`);
+	console.error(chalk.gray(`API Points: ${response.rateLimit.cost} used\t${response.rateLimit.remaining} remaining`));
 }
 const { repo, pr, sha } = args;
 
