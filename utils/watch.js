@@ -5,6 +5,19 @@ const evaluatePending = require('../utils/evaluatePending');
 module.exports = async function watch(retryDelay, getResponse) {
 	const response = await getResponse();
 
+	const { remaining: remAPIPoints, cost: lastReqCost, resetAt } = response.rateLimit;
+	const currentTime = new Date();
+	const resetTime = new Date(resetAt);
+	const milliSecondsLeft = resetTime - currentTime;
+	const secondsLeft = Math.ceil(milliSecondsLeft / 1000);
+
+	if ((remAPIPoints < lastReqCost) && (retryDelay < milliSecondsLeft)) {
+		process.stderr.write(`API points exhausted. Command will run after ${secondsLeft} seconds\n\n`);
+		setTimeout(() => {
+			process.stderr.write('.');
+		}, milliSecondsLeft);
+	}
+
 	const isPendingChecks = evaluatePending(response);
 
 	if (!isPendingChecks) {
