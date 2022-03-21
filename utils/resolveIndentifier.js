@@ -1,6 +1,5 @@
 'use strict';
 
-const util = require('util');
 const exec = require('child_process').execSync;
 
 // function to resolve the identifier to it's sha
