@@ -60,7 +60,7 @@ module.exports = function evaluatePullRequest(response) {
 	if (reviewDecision === 'CHANGES_REQUESTED') {
 		return pullRequestStatus.REVIEW_DISAPPROVED;
 	} else if (reviewDecision === 'REVIEW_REQUIRED') {
-		return !viewerCanMergeAsAdmin ? pullRequestStatus.REVIEW_REQUIRED : pullRequestStatus.BYPASSABLE;
+		return viewerCanMergeAsAdmin ? pullRequestStatus.BYPASSABLE : pullRequestStatus.REVIEW_REQUIRED;
 	}
 
 	return pullRequestStatus.MERGEABLE;
