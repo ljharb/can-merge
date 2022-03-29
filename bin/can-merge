@@ -136,6 +136,7 @@ function outputStatus(response) {
 		} else {
 			const status = evaluateCommitStatus(response.repository.commit);
 			console.info(getMessage(status));
+			console.log(getMessage(status));
 			if (status !== commitStatus.STATUS_SUCCESS) {
 				process.exitCode = (process.exitCode ?? 0) + 1;
 			}
