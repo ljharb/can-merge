@@ -18,6 +18,7 @@ module.exports = function evaluatePullRequest(response) {
 		merged,
 		state,
 		reviewDecision,
+		viewerCanMergeAsAdmin,
 	} = response;
 
 	if (state !== 'OPEN') {
@@ -59,7 +60,7 @@ module.exports = function evaluatePullRequest(response) {
 	if (reviewDecision === 'CHANGES_REQUESTED') {
 		return pullRequestStatus.REVIEW_DISAPPROVED;
 	} else if (reviewDecision === 'REVIEW_REQUIRED') {
-		return pullRequestStatus.REVIEW_REQUIRED;
+		return viewerCanMergeAsAdmin ? pullRequestStatus.BYPASSABLE : pullRequestStatus.REVIEW_REQUIRED;
 	}
 
 	return pullRequestStatus.MERGEABLE;

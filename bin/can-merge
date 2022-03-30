@@ -71,7 +71,7 @@ const args = Yargs
 		sha: {
 			alias: 's',
 			default: 'HEAD',
-			describe: 'commit SHA',
+			describe: 'commit SHA, or any git commit-ish',
 			type: 'string',
 		},
 		token: {

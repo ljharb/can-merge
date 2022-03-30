@@ -1,6 +1,7 @@
 {
 	"extends": ["@ljharb/eslint-config/node/14"],
 	"rules": {
+		"complexity": "off",
 		"func-style": "off",
 		"id-length": ["error", { "min": 1, "max": 64 }],
 		"object-curly-newline": "off",

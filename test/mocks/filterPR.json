@@ -1,186 +1,156 @@
-[
-	{
+[{
 		"response": {
 			"search": {
 				"edges": []
 			}
 		},
-        "argPr": "1",
+		"argPr": "1",
 		"expected": [],
 		"description": "No pr found: No pr found in repository should return an empty array regardless of argPR"
 	},
 	{
 		"response": {
 			"search": {
-				"edges": [
-					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
-								"title": "dummy PR",
-								"number": 1,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
+				"edges": [{
+					"node": [{
+						"state": "OPEN",
+						"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
+						"title": "dummy PR",
+						"number": 1,
+						"merged": false,
+						"mergeable": "MERGEABLE",
+						"reviewDecision": null,
+						"potentialMergeCommit": {
+							"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
+						},
+						"commits": {
+							"nodes": [{
+								"commit": {
+									"statusCheckRollup": null
 								}
-							}
-						]
-					}
-				]
+							}]
+						}
+					}]
+				}]
 			}
 		},
-        "argPr" : "1",
-		"expected": [
-			{
-				"state": "OPEN",
-				"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
-				"title": "dummy PR",
-				"number": 1,
-				"merged": false,
-				"mergeable": "MERGEABLE",
-				"reviewDecision": null,
-				"potentialMergeCommit": {
-					"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
-				},
-				"commits": {
-					"nodes": [
-						{
-							"commit": {
-								"statusCheckRollup": null
-							}
-						}
-					]
-				}
+		"argPr": "1",
+		"expected": [{
+			"state": "OPEN",
+			"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
+			"title": "dummy PR",
+			"number": 1,
+			"merged": false,
+			"mergeable": "MERGEABLE",
+			"reviewDecision": null,
+			"potentialMergeCommit": {
+				"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
+			},
+			"commits": {
+				"nodes": [{
+					"commit": {
+						"statusCheckRollup": null
+					}
+				}]
 			}
-		],
+		}],
 		"description": "One pr found and argPR specified found: return parsed response in an array length === 1"
 	},
-    {
+	{
 		"response": {
 			"search": {
-				"edges": [
-					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
-								"title": "dummy PR",
-								"number": 1,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
+				"edges": [{
+					"node": [{
+						"state": "OPEN",
+						"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
+						"title": "dummy PR",
+						"number": 1,
+						"merged": false,
+						"mergeable": "MERGEABLE",
+						"reviewDecision": null,
+						"potentialMergeCommit": {
+							"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
+						},
+						"commits": {
+							"nodes": [{
+								"commit": {
+									"statusCheckRollup": null
 								}
-							}
-						]
-					}
-				]
+							}]
+						}
+					}]
+				}]
 			}
 		},
-        "argPr" : "2",
+		"argPr": "2",
 		"expected": [],
 		"description": "One pr found and argPR specified but not found: return empty array"
 	},
 	{
 		"response": {
 			"search": {
-				"edges": [
-					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
-								"title": "dummy PR",
-								"number": 1,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+				"edges": [{
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
+							"title": "dummy PR",
+							"number": 1,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					},
 					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/2",
-								"title": "dummy PR 2",
-								"number": 2,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/2",
+							"title": "dummy PR 2",
+							"number": 2,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					},
 					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/3",
-								"title": "dummy PR 3",
-								"number": 3,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/3",
+							"title": "dummy PR 3",
+							"number": 3,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					}
 				]
 			},
@@ -189,110 +159,93 @@
 				"remaining": 4997
 			}
 		},
-        "argPr": "1",
-		"expected": [
-			{
-				"state": "OPEN",
-				"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
-				"title": "dummy PR",
-				"number": 1,
-				"merged": false,
-				"mergeable": "MERGEABLE",
-				"reviewDecision": null,
-				"potentialMergeCommit": {
-					"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
-				},
-				"commits": {
-					"nodes": [
-						{
-							"commit": {
-								"statusCheckRollup": null
-							}
-						}
-					]
-				}
+		"argPr": "1",
+		"expected": [{
+			"state": "OPEN",
+			"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
+			"title": "dummy PR",
+			"number": 1,
+			"merged": false,
+			"mergeable": "MERGEABLE",
+			"reviewDecision": null,
+			"potentialMergeCommit": {
+				"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
+			},
+			"commits": {
+				"nodes": [{
+					"commit": {
+						"statusCheckRollup": null
+					}
+				}]
 			}
-		],
+		}],
 		"description": "Multiple prs found and argPR specified found: filter out and only return one that matches argPr"
 	},
-    {
+	{
 		"response": {
 			"search": {
-				"edges": [
-					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
-								"title": "dummy PR",
-								"number": 5,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+				"edges": [{
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
+							"title": "dummy PR",
+							"number": 5,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					},
 					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/2",
-								"title": "dummy PR 2",
-								"number": 2,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/2",
+							"title": "dummy PR 2",
+							"number": 2,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					},
 					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/3",
-								"title": "dummy PR 3",
-								"number": 3,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/3",
+							"title": "dummy PR 3",
+							"number": 3,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					}
 				]
 			},
@@ -301,88 +254,75 @@
 				"remaining": 4997
 			}
 		},
-        "argPr": "1",
+		"argPr": "1",
 		"expected": [],
 		"description": "Multiple prs found and argPR specified not found: return empty array"
 	},
-    {
+	{
 		"response": {
 			"search": {
-				"edges": [
-					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
-								"title": "dummy PR",
-								"number": 1,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+				"edges": [{
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
+							"title": "dummy PR",
+							"number": 1,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					},
 					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/2",
-								"title": "dummy PR 2",
-								"number": 2,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/2",
+							"title": "dummy PR 2",
+							"number": 2,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					},
 					{
-						"node": [
-							{
-								"state": "OPEN",
-								"url": "https://github.com/MeghalBisht/dummy-repo/pull/3",
-								"title": "dummy PR 3",
-								"number": 3,
-								"merged": false,
-								"mergeable": "MERGEABLE",
-								"reviewDecision": null,
-								"potentialMergeCommit": {
-									"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1"
-								},
-								"commits": {
-									"nodes": [
-										{
-											"commit": {
-												"statusCheckRollup": null
-											}
-										}
-									]
-								}
+						"node": [{
+							"state": "OPEN",
+							"url": "https://github.com/MeghalBisht/dummy-repo/pull/3",
+							"title": "dummy PR 3",
+							"number": 3,
+							"merged": false,
+							"mergeable": "MERGEABLE",
+							"reviewDecision": null,
+							"potentialMergeCommit": {
+								"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1"
+							},
+							"commits": {
+								"nodes": [{
+									"commit": {
+										"statusCheckRollup": null
+									}
+								}]
 							}
-						]
+						}]
 					}
 				]
 			},
@@ -391,8 +331,7 @@
 				"remaining": 4997
 			}
 		},
-		"expected": [
-			{
+		"expected": [{
 				"state": "OPEN",
 				"url": "https://github.com/MeghalBisht/dummy-repo/pull/1",
 				"title": "dummy PR",
@@ -404,13 +343,11 @@
 					"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/1f197b41bfd76a2fb5480a6af5a6bc6d06a7f6e7"
 				},
 				"commits": {
-					"nodes": [
-						{
-							"commit": {
-								"statusCheckRollup": null
-							}
+					"nodes": [{
+						"commit": {
+							"statusCheckRollup": null
 						}
-					]
+					}]
 				}
 			},
 			{
@@ -425,13 +362,11 @@
 					"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/636e6f943e0dd719b49aeec53991a0e7384a684d"
 				},
 				"commits": {
-					"nodes": [
-						{
-							"commit": {
-								"statusCheckRollup": null
-							}
+					"nodes": [{
+						"commit": {
+							"statusCheckRollup": null
 						}
-					]
+					}]
 				}
 			},
 			{
@@ -446,13 +381,11 @@
 					"commitUrl": "https://github.com/MeghalBisht/dummy-repo/commit/0ffc1461f1ad736fa27ee1c38856cff5611673e1"
 				},
 				"commits": {
-					"nodes": [
-						{
-							"commit": {
-								"statusCheckRollup": null
-							}
+					"nodes": [{
+						"commit": {
+							"statusCheckRollup": null
 						}
-					]
+					}]
 				}
 			}
 		],
