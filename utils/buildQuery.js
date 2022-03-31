@@ -26,6 +26,12 @@ const pullRequestQuery = (name, owner, pr, sha) => `
 					commits(last: 1) {
 						nodes {
 							commit {
+								oid
+								author {
+									user {
+										url
+									}
+								}
 								statusCheckRollup {
 									state
 									contexts(last: 100) {
@@ -70,6 +76,13 @@ const commitStatusQuery = (name, owner, sha) => `
 			... on Commit {
 				statusCheckRollup {
 					state
+					commit {
+						author {
+							user {
+								url
+							}
+						}
+					}
 					contexts(last: 100) {
 						totalCount
 						pageInfo {
