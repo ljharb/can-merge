@@ -1,6 +1,12 @@
-## For Contributors:
+# Contributing
 
-### Installing `can-merge`
+:partying_face: First off, thanks for taking the time to contribute to `can-merge`! :partying_face:
+
+`can-merge` is managed by [@LJHarb](https://github.com/ljharb), which is hosted on GitHub. 
+
+To see a more comprehensive guide as to how to go about contributing to this project, including suggestions about how to make a PR, finding your first issue, submitting a good bug report, as well as coding conventions, please click [here](https://github.com/ljharb/.github/blob/main/CONTRIBUTING.md).
+
+# Installing `can-merge`
 
 Export your [GitHub Personal Access Token](https://github.com/settings/tokens) in your `.bash_profile`, `.zsh_profile`, etc:
 
@@ -15,7 +21,7 @@ npm install
 npm link
 ```
 
-Add CLI arguments as needed (see [Usage](#usage))
+Add CLI arguments as needed (see [Usage](./README.md#usage))
 
 ```bash
 node .
@@ -29,7 +35,7 @@ can-merge
 
 You should be able to drop into the CLI, generate a token, and play around in the can-merge interface.
 
-### Testing
+# Testing
 `can-merge` uses the test framework [tape](https://github.com/substack/tape).
 
 To run all tests for `can-merge`, run:
@@ -92,3 +98,9 @@ faucet test/evaluateCommitStatus.js
 ```
 
 <img width="934" alt="Screen Shot 2022-03-17 at 3 04 43 PM" src="https://user-images.githubusercontent.com/26771302/158877312-490fe33e-eb0d-4c2e-ae13-adca208ac818.png">
+
+# Code of Conduct
+[Code of Conduct](https://github.com/ljharb/.github/blob/HEAD/CODE_OF_CONDUCT.md)
+
+# Where can I ask for help?
+If you have any questions, please contact [@LJHarb](mailto:ljharb@gmail.com).
