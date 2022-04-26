@@ -1,0 +1,676 @@
+[
+  {
+    "description": "evaluation of a PR with SUCCESS should return true",
+    "expected": true,
+    "res": {
+      "repository": {
+        "branchProtectionRules": {
+          "nodes": []
+        },
+        "pullRequest": {
+          "state": "OPEN",
+          "url": "https://github.com/facebook/create-react-app/pull/11329",
+          "title": "Add default .editorconfig to template",
+          "number": 11329,
+          "merged": false,
+          "mergeable": "MERGEABLE",
+          "reviewDecision": null,
+          "potentialMergeCommit": {
+            "commitUrl": "https://github.com/facebook/create-react-app/commit/3b0934e21e39a1fc3d3e8fa636a9cfd3e3663e04"
+          },
+          "commits": {
+            "nodes": [
+              {
+                "commit": {
+                  "statusCheckRollup": {
+                    "state": "SUCCESS",
+                    "contexts": {
+                      "totalCount": 7,
+                      "pageInfo": {
+                        "endCursor": "Nw",
+                        "hasNextPage": false
+                      },
+                      "nodes": [
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "Facebook CLA Check",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "facebook.create-react-app",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "facebook.create-react-app (Kitchensink LinuxNode14)",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "facebook.create-react-app (Kitchensink LinuxNode16)",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "facebook.create-react-app (OldNode)",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "facebook.create-react-app (Simple LinuxNode14)",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "facebook.create-react-app (Simple LinuxNode16)",
+                          "conclusion": "SUCCESS"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "rateLimit": {
+        "cost": 1,
+        "remaining": 4987
+      }
+    }
+  },
+  {
+    "description": "evaluation of a PR with FAILURE should return false",
+    "expected": false,
+    "res": {
+      "repository": {
+        "branchProtectionRules": {
+          "nodes": []
+        },
+        "pullRequest": {
+          "state": "CLOSED",
+          "url": "https://github.com/facebook/react/pull/22155",
+          "title": "Fixed writing mistakes in readme",
+          "number": 22155,
+          "merged": false,
+          "mergeable": "MERGEABLE",
+          "reviewDecision": null,
+          "potentialMergeCommit": {
+            "commitUrl": "https://github.com/facebook/react/commit/5973eb135283c141be1403399a154878baf90bb8"
+          },
+          "commits": {
+            "nodes": [
+              {
+                "commit": {
+                  "statusCheckRollup": {
+                    "state": "FAILURE",
+                    "contexts": {
+                      "totalCount": 34,
+                      "pageInfo": {
+                        "endCursor": "MzQ",
+                        "hasNextPage": false
+                      },
+                      "nodes": [
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "Facebook CLA Check",
+                          "conclusion": "ACTION_REQUIRED"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: RELEASE_CHANNEL_stable_yarn_build",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: RELEASE_CHANNEL_stable_yarn_test_dom_fixtures",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: build_devtools_and_process_artifacts",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: get_base_build",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: process_artifacts_combined",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: setup",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: sizebot",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: sync_reconciler_forks",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_build",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_build_combined",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_flow",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_lint",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_lint_build",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=experimental --env=development",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=experimental --env=development --persistent",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=experimental --env=production",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=stable --env=development",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=stable --env=development --persistent",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=stable --env=production",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=www-classic --env=development --variant=false",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=www-classic --env=development --variant=true",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=www-classic --env=production --variant=false",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=www-classic --env=production --variant=true",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=www-modern --env=development --variant=false",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=www-modern --env=development --variant=true",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=www-modern --env=production --variant=false",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test--r=www-modern --env=production --variant=true",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test_build---project=devtools -r=experimental",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test_build--r=experimental --env=development",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test_build--r=experimental --env=production",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test_build--r=stable --env=development",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: yarn_test_build--r=stable --env=production",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/codesandbox",
+                          "description": "Building packages succeeded."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "rateLimit": {
+        "cost": 1,
+        "remaining": 4986
+      }
+    }
+  },
+  {
+    "description": "evaluation of a PR with FAILURE should return false",
+    "expected": false,
+    "res": {
+      "repository": {
+        "branchProtectionRules": {
+          "nodes": []
+        },
+        "pullRequest": {
+          "state": "OPEN",
+          "url": "https://github.com/ethereum/solidity/pull/11830",
+          "title": "Nested brackets optimization",
+          "number": 11830,
+          "merged": false,
+          "mergeable": "MERGEABLE",
+          "reviewDecision": "REVIEW_REQUIRED",
+          "potentialMergeCommit": {
+            "commitUrl": "https://github.com/ethereum/solidity/commit/e618bbd95871e69660746f818c9463de0e82b1dc"
+          },
+          "commits": {
+            "nodes": [
+              {
+                "commit": {
+                  "statusCheckRollup": {
+                    "state": "FAILURE",
+                    "contexts": {
+                      "totalCount": 22,
+                      "pageInfo": {
+                        "endCursor": "MjI",
+                        "hasNextPage": false
+                      },
+                      "nodes": [
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_archlinux",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_ems",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_osx",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_ubu",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_ubu_clang",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_ubu_cxx20",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_ubu_ossfuzz",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_ubu_release",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_ubu_static",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_win",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: b_win_release",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: chk_coding_style",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "FAILURE",
+                          "context": "ci/circleci: chk_pylint",
+                          "description": "Your tests failed on CircleCI"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: b_docs",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: chk_antlr_grammar",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: chk_buglist",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: chk_docs_pragma_min_version",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: chk_errorcodes",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: chk_proofs",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: chk_spelling",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: t_pyscripts_ubu",
+                          "description": "Your tests passed on CircleCI!"
+                        },
+                        {
+                          "__typename": "StatusContext",
+                          "state": "SUCCESS",
+                          "context": "ci/circleci: t_pyscripts_win",
+                          "description": "Your tests passed on CircleCI!"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "rateLimit": {
+        "cost": 1,
+        "remaining": 4985
+      }
+    }
+  },
+  {
+    "description": "evaluation of a PR with PENDING should return false",
+    "expected": false,
+    "res": {
+      "repository": {
+        "branchProtectionRules": {
+          "nodes": []
+        },
+        "pullRequest": {
+          "state": "OPEN",
+          "url": "https://github.com/nodejs/node/pull/39841",
+          "title": "crypto: cleanup validation",
+          "number": 39841,
+          "merged": false,
+          "mergeable": "MERGEABLE",
+          "reviewDecision": null,
+          "potentialMergeCommit": {
+            "commitUrl": "https://github.com/nodejs/node/commit/b9de67c66fe4da6fd25d9f83b3120f4914441a4c"
+          },
+          "commits": {
+            "nodes": [
+              {
+                "commit": {
+                  "statusCheckRollup": {
+                    "state": "PENDING",
+                    "contexts": {
+                      "totalCount": 18,
+                      "pageInfo": {
+                        "endCursor": "MTg",
+                        "hasNextPage": false
+                      },
+                      "nodes": [
+                        {
+                          "__typename": "CheckRun",
+                          "status": "IN_PROGRESS",
+                          "name": "coverage-linux",
+                          "conclusion": null
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "IN_PROGRESS",
+                          "name": "test-asan",
+                          "conclusion": null
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "IN_PROGRESS",
+                          "name": "test-linux",
+                          "conclusion": null
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "IN_PROGRESS",
+                          "name": "test-macOS",
+                          "conclusion": null
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "build-tarball",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-commit-message",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "build-windows",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "coverage-windows",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-addon-docs",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "build-docs",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "IN_PROGRESS",
+                          "name": "test-tarball-linux",
+                          "conclusion": null
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-cpp",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-md",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-js",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-py",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-sh",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-codeowners",
+                          "conclusion": "SUCCESS"
+                        },
+                        {
+                          "__typename": "CheckRun",
+                          "status": "COMPLETED",
+                          "name": "lint-pr-url",
+                          "conclusion": "SUCCESS"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "rateLimit": {
+        "cost": 1,
+        "remaining": 4984
+      }
+    }
+  }
+]
