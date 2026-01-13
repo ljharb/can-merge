@@ -116,5 +116,5 @@ Used to specify if the tool should keep polling for changes in the status checks
 [downloads-url]: https://npm-stat.com/charts.html?package=can-merge
 [codecov-image]: https://codecov.io/gh/ljharb/can-merge/branch/main/graphs/badge.svg
 [codecov-url]: https://app.codecov.io/gh/ljharb/can-merge/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/ljharb/can-merge
+[actions-image]: https://img.shields.io/github/check-runs/ljharb/can-merge/main
 [actions-url]: https://github.com/ljharb/can-merge/actions
