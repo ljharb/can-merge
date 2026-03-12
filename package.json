@@ -51,7 +51,7 @@
 		"yargs": "^17.4.0"
 	},
 	"engines": {
-		"node": "^14 || >= 16"
+		"node": "^22.22 || ^24.14 || >= 25.8.1"
 	},
 	"auto-changelog": {
 		"output": "CHANGELOG.md",
