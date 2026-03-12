@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs';
+import pargs from 'pargs';
 import { styleText } from 'util';
 import https from 'https';
 
@@ -26,111 +26,107 @@ const {
 	NODE_ENV,
 } = process.env;
 
-const ORIGIN = Object('origin');
-
 const defaultRepo = getRepo(process.cwd());
-const REPO = defaultRepo && Object(defaultRepo);
 
-const args = yargs(process.argv.slice(2))
-	.usage('Usage: can-merge -p <pr> [-r <repo>]')
-	.help()
-	.strict()
-	.options({
+const { help, values } = await pargs(import.meta.filename, {
+	options: {
 		commit: {
-			alias: 'c',
+			short: 'c',
 			default: false,
-			demandOption: false,
-			describe: 'check commit status',
 			type: 'boolean',
 		},
 		pr: {
-			alias: 'p',
-			demandOption: false,
-			describe: 'pull request',
+			short: 'p',
 			type: 'string',
 		},
 		remote: {
-			default: ORIGIN,
-			demandOption: false,
-			describe: 'remote name',
 			type: 'string',
 		},
 		repo: {
-			alias: 'r',
-			default: REPO,
-			demandOption: !REPO,
-			describe: 'repository',
+			short: 'r',
 			type: 'string',
+			default: defaultRepo,
 		},
 		retryDelay: {
 			default: 5e3,
-			describe: 'delay before polling the api',
-			type: 'number',
+			type: 'integer',
 		},
 		sha: {
-			alias: 's',
+			short: 's',
 			default: 'HEAD',
-			describe: 'commit SHA, or any git commit-ish',
 			type: 'string',
 		},
 		token: {
-			demandOption: !(GH_TOKEN || GITHUB_TOKEN),
-			describe: 'github access token',
 			type: 'string',
 		},
 		watch: {
-			alias: 'w',
-			describe: 'watch pending checks',
+			short: 'w',
 			type: 'boolean',
 		},
-	})
-	.check((argv) => {
-		if (argv.repo !== REPO && argv.remote !== ORIGIN) {
-			throw styleText('red', '`--repo` and `--remote` are mutually exclusive');
-		}
-		return true;
-	})
-	.middleware((argv) => {
-		if (argv.sha === 'HEAD') {
-			return {
-				...argv,
-				sha: getSHA(process.cwd(), true),
-			};
-		}
-		if (argv.sha) {
-			return {
-				...argv,
-				sha: resolveIndentifier(argv.sha, true),
-			};
-		}
-		return argv;
-	})
-	.middleware((argv) => {
-		if (argv.repo === REPO && argv.remote) {
-			// repo is default, remote is provided
-			return {
-				...argv,
-				...argv.remote && { repo: getRepo(process.cwd(), argv.remote) },
-			};
-		}
-		return argv;
-	})
-	.check((argv) => {
-		if (!argv.repo) {
-			if (argv.remote !== ORIGIN) {
-				throw styleText('red', `Could not find remote git repo with remote name \`${argv.remote}\``);
-			}
-			throw styleText('red', 'Could not infer any git repository from directory.\nAre you sure you are in a git repository? Otherwise, please specify `--repo=`');
-		}
-		if (argv.watch && !argv.sha && !argv.pr) {
-			throw styleText('red', 'Could not infer a PR or a SHA. Please specify a pull request to watch with `--pr`, or a commit with `--sha`');
-		}
+	},
+});
 
-		return true;
-	})
-	.parse();
+const {
+	commit,
+	pr: argPR,
+	remote,
+	repo: argRepo,
+	retryDelay,
+	sha: argSHA,
+	token: argToken,
+	watch: shouldWatch,
+} = values;
+await help();
 
-const token = args.token || GITHUB_TOKEN || GH_TOKEN;
+if (!argToken && !GH_TOKEN && !GITHUB_TOKEN) {
+	console.error(styleText('red', 'Error: --token is required (or set GITHUB_TOKEN / GH_TOKEN)'));
+	process.exit(1);
+}
+
+if (argRepo && remote) {
+	console.error(styleText('red', 'Error: `--repo` and `--remote` are mutually exclusive'));
+	process.exit(1);
+}
+
+if (!defaultRepo && !argRepo && !remote) {
+	console.error(styleText('red', 'Error: --repo is required (could not infer a git repository from directory)'));
+	process.exit(1);
+}
+
+function resolveRepo() {
+	if (remote) {
+		const remoteRepo = getRepo(process.cwd(), remote);
+		if (!remoteRepo) {
+			console.error(styleText('red', `Could not find remote git repo with remote name \`${remote}\``));
+			return process.exit(1);
+		}
+		return remoteRepo;
+	}
+	return argRepo;
+}
+
+function resolveSHA() {
+	if (argPR) {
+		return null;
+	}
+	if (argSHA === 'HEAD') {
+		return getSHA(process.cwd(), true);
+	}
+	if (argSHA) {
+		return resolveIndentifier(argSHA, true);
+	}
+	return null;
+}
+
+const repo = resolveRepo();
+const sha = resolveSHA();
+
+if (shouldWatch && !sha && !argPR) {
+	console.error(styleText('red', 'Could not infer a PR or a SHA. Please specify a pull request to watch with `--pr`, or a commit with `--sha`'));
+	process.exit(1);
+}
+
+const token = argToken || GITHUB_TOKEN || GH_TOKEN;
 
 function displayChecks(checks) {
 	checks.forEach((p) => {
@@ -157,9 +153,9 @@ function outputStatus(response, params) {
 	if (NODE_ENV === 'DEBUG') {
 		console.error(JSON.stringify(response, null, 2));
 	}
-	if (args.commit) {
+	if (commit) {
 		if (response.repository.commit === null) {
-			console.info(styleText('redBright', `⚠ This remote repository does not contain any commits matching sha: ${args.sha}`));
+			console.info(styleText('redBright', `⚠ This remote repository does not contain any commits matching sha: ${sha}`));
 		} else {
 			const status = evaluateCommitStatus(response.repository.commit);
 			console.info(getMessage(status));
@@ -170,11 +166,11 @@ function outputStatus(response, params) {
 	}
 
 	getPRWithRequiredChecks(filterPullRequest(response), params).then((prs) => {
-		if (prs.length === 0 && !args.commit) {
+		if (prs.length === 0 && !commit) {
 			if (params.pr) {
-				console.info(styleText('redBright', `⚠ This remote repository does not contain any pull requests matching number: ${args.pr}`));
+				console.info(styleText('redBright', `⚠ This remote repository does not contain any pull requests matching number: ${argPR}`));
 			} else {
-				console.info(styleText('redBright', `⚠ This remote repository does not contain any pull requests matching sha: ${args.sha}`));
+				console.info(styleText('redBright', `⚠ This remote repository does not contain any pull requests matching sha: ${sha}`));
 			}
 		} else {
 			prs.forEach((pr) => {
@@ -194,8 +190,6 @@ function outputStatus(response, params) {
 	console.error(`API Points: used - ${response.rateLimit.cost}\tremaining - ${response.rateLimit.remaining}`);
 }
 
-const { repo, pr, sha } = args;
-
 const options = {
 	hostname: 'github.com',
 	path: `/${repo}`,
@@ -204,16 +198,16 @@ const options = {
 
 https.request(options, (response) => {
 	const params = {
-		commit: args.commit,
+		commit,
 		repo: parseRemoteUrl(response.headers?.location) ?? String(repo),
-		pr,
-		sha: pr ? null : sha,
+		pr: argPR,
+		sha,
 		token,
 	};
 
-	if (args.watch) {
+	if (shouldWatch) {
 		console.error('Waiting for all checks to complete ...\n');
-		watch(args.retryDelay, () => runQuery(params)).then((res) => {
+		watch(retryDelay, () => runQuery(params)).then((res) => {
 			console.clear();
 			outputStatus(res, params);
 		}).catch((error) => { console.log(styleText('red', error)); });

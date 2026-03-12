@@ -1,0 +1,12 @@
+Usage: can-merge -p <pr> [-r <repo>]
+
+Options:
+  -c, --commit        check commit status
+  -p, --pr            pull request
+      --remote        remote name
+  -r, --repo          repository
+      --retryDelay    delay before polling the api (default: 5000)
+  -s, --sha           commit SHA, or any git commit-ish (default: HEAD)
+      --token         github access token
+  -w, --watch         watch pending checks
+      --help          show this help message

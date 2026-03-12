@@ -9,7 +9,7 @@
 	"scripts": {
 		"prepublishOnly": "safe-publish-latest",
 		"prepublish": "not-in-publish || npm run prepublishOnly",
-		"lint": "eslint --ext=js,mjs bin/** .",
+		"lint": "eslint --ext=js,mjs .",
 		"pretest": "npm run lint",
 		"tests-only": "c8 tape 'test/**/*.mjs' | tap-spec",
 		"test": "npm run tests-only",
@@ -46,8 +46,8 @@
 	"dependencies": {
 		"@octokit/graphql": "^4.8.0",
 		"git-repo-info": "^2.1.1",
-		"parse-git-config": "^3.0.0",
-		"yargs": "^17.7.2"
+		"pargs": "^1.3.0",
+		"parse-git-config": "^3.0.0"
 	},
 	"engines": {
 		"node": "^22.22 || ^24.14 || >= 25.8.1"

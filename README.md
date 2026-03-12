@@ -39,16 +39,16 @@ $ npx can-merge --help
 Usage: can-merge -p <pr> [-r <repo>]
 
 Options:
-      --version     Show version number                                [boolean]
-      --help        Show help                                          [boolean]
-  -c, --commit      check commit status               [boolean] [default: false]
-  -p, --pr          pull request                                        [string]
-      --remote      remote name                     [string] [default: "origin"]
-  -r, --repo        repository            [string] [default: "ljharb/can-merge"]
-      --retryDelay  delay before polling the api        [number] [default: 5000]
-  -s, --sha         commit SHA, or any git commit-ish [string] [default: "HEAD"]
-      --token       github access token                      [string] [required]
-  -w, --watch       watch pending checks                               [boolean]
+  -c, --commit        check commit status
+  -p, --pr            pull request
+      --remote        remote name
+  -r, --repo          repository
+      --retryDelay    delay before polling the api (default: 5000)
+  -s, --sha           commit SHA, or any git commit-ish (default: HEAD)
+      --token         github access token
+  -w, --watch         watch pending checks
+      --help          show this help message
+
 
 ```
 <!-- MD-MAGIC-EXAMPLE:END -->
