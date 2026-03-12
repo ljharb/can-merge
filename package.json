@@ -2,9 +2,12 @@
 	"name": "can-merge",
 	"version": "0.1.0",
 	"description": "",
-	"main": "./bin/can-merge.mjs",
 	"bin": {
 		"can-merge": "./bin/can-merge.mjs"
+	},
+	"main": false,
+	"exports": {
+		"./package.json": "./package.json"
 	},
 	"scripts": {
 		"prepublishOnly": "safe-publish-latest",
