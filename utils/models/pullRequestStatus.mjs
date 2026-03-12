@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+export default {
 	CLOSED: '⚠ This PR is closed',
 	CONFLICT: '⚠ There are merge conflicts with the base branch',
 	MERGEABLE: '✔ This PR is mergeable',

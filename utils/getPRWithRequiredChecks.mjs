@@ -1,9 +1,7 @@
-'use strict';
+import parsePullRequest from './parsePullRequest.mjs';
+import runQuery from './runQuery.mjs';
 
-const parsePullRequest = require('./parsePullRequest');
-const runQuery = require('./runQuery');
-
-module.exports = async function getPRWithRequiredChecks(response, params) {
+export default async function getPRWithRequiredChecks(response, params) {
 	// If --pr is specified
 	if (params.pr) {
 		return response.filter((pr) => String(pr.number) === params.pr);
@@ -26,4 +24,4 @@ module.exports = async function getPRWithRequiredChecks(response, params) {
 			throw err.message;
 		}
 	}));
-};
+}

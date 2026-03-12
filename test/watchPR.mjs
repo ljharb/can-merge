@@ -1,8 +1,9 @@
-'use strict';
+import { createRequire } from 'module';
+import test from 'tape';
 
-const test = require('tape');
+import watch from '../utils/watch.mjs';
 
-const watch = require('../utils/watch');
+const require = createRequire(import.meta.url);
 const mockWatchPR = require('./mocks/watchPR.json');
 
 const iter = (iterable) => {

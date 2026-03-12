@@ -1,8 +1,9 @@
-'use strict';
+import { createRequire } from 'module';
+import test from 'tape';
 
-const test = require('tape');
+import parsePullRequest from '../utils/parsePullRequest.mjs';
 
-const parsePullRequest = require('../utils/parsePullRequest');
+const require = createRequire(import.meta.url);
 const mockParsePR = require('./mocks/parsePR.json');
 
 test('parsePullRequest', (t) => {

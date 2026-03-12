@@ -1,10 +1,9 @@
-'use strict';
+import pullRequestStatus from './models/pullRequestStatus.mjs';
+import evaluateChecks from './evaluateChecks.mjs';
 
-const pullRequestStatus = require('./models/pullRequestStatus');
-const evaluateChecks = require('./evaluateChecks');
 const doesPRHaveConflicts = (pullRequest) => pullRequest.mergeable === 'MERGEABLE';
 
-module.exports = function evaluatePullRequest(response, requiredChecks) {
+export default function evaluatePullRequest(response, requiredChecks) {
 	if (!response) {
 		return false;
 	}
@@ -45,4 +44,4 @@ module.exports = function evaluatePullRequest(response, requiredChecks) {
 	}
 
 	return pullRequestStatus.MERGEABLE;
-};
+}

@@ -1,26 +1,24 @@
 #!/usr/bin/env node
 
-'use strict';
+import yargs from 'yargs';
+import { styleText } from 'util';
+import https from 'https';
 
-const Yargs = require('yargs');
-const { styleText } = require('util');
-const https = require('https');
+import watch from '../utils/watch.mjs';
+import getRepo from '../utils/getRepo.mjs';
+import getSHA from '../utils/getSHA.mjs';
 
-const watch = require('../utils/watch');
-const getRepo = require('../utils/getRepo');
-const getSHA = require('../utils/getSHA');
-
-const runQuery = require('../utils/runQuery');
-const evaluatePullRequest = require('../utils/evaluatePullRequest');
-const evaluateChecks = require('../utils/evaluateChecks');
-const parseRemoteUrl = require('../utils/parseRemoteUrl');
-const pullRequestStatus = require('../utils/models/pullRequestStatus');
-const getMessage = require('../utils/getMessage');
-const evaluateCommitStatus = require('../utils/evaluateCommitStatus');
-const commitStatus = require('../utils/models/commitStatus');
-const filterPullRequest = require('../utils/filterPullRequest');
-const resolveIndentifier = require('../utils/resolveIndentifier');
-const getPRWithRequiredChecks = require('../utils/getPRWithRequiredChecks');
+import runQuery from '../utils/runQuery.mjs';
+import evaluatePullRequest from '../utils/evaluatePullRequest.mjs';
+import evaluateChecks from '../utils/evaluateChecks.mjs';
+import parseRemoteUrl from '../utils/parseRemoteUrl.mjs';
+import pullRequestStatus from '../utils/models/pullRequestStatus.mjs';
+import getMessage from '../utils/getMessage.mjs';
+import evaluateCommitStatus from '../utils/evaluateCommitStatus.mjs';
+import commitStatus from '../utils/models/commitStatus.mjs';
+import filterPullRequest from '../utils/filterPullRequest.mjs';
+import resolveIndentifier from '../utils/resolveIndentifier.mjs';
+import getPRWithRequiredChecks from '../utils/getPRWithRequiredChecks.mjs';
 
 const {
 	GITHUB_TOKEN,
@@ -33,7 +31,7 @@ const ORIGIN = Object('origin');
 const defaultRepo = getRepo(process.cwd());
 const REPO = defaultRepo && Object(defaultRepo);
 
-const args = Yargs
+const args = yargs(process.argv.slice(2))
 	.usage('Usage: can-merge -p <pr> [-r <repo>]')
 	.help()
 	.strict()

@@ -1,11 +1,10 @@
-'use strict';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import test from 'tape';
 
-const path = require('path');
-const test = require('tape');
+import getSHA from '../utils/getSHA.mjs';
 
-const getSHA = require('../utils/getSHA');
-
-const root = path.join(__dirname, '..');
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 test('getSHA', (t) => {
 	const long = getSHA(root);

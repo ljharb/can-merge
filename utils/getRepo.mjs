@@ -1,10 +1,8 @@
-'use strict';
+import gitRepoInfo from 'git-repo-info';
+import parse from 'parse-git-config';
+import parseRemoteUrl from './parseRemoteUrl.mjs';
 
-const gitRepoInfo = require('git-repo-info');
-const parse = require('parse-git-config');
-const parseRemoteUrl = require('./parseRemoteUrl');
-
-module.exports = function getRepo(path = process.cwd(), remote = 'origin') {
+export default function getRepo(path = process.cwd(), remote = 'origin') {
 	const { commonGitDir } = gitRepoInfo(path);
 	if (commonGitDir) {
 		const config = parse.sync({ path: `${commonGitDir}/config` });
@@ -12,4 +10,4 @@ module.exports = function getRepo(path = process.cwd(), remote = 'origin') {
 		return parseRemoteUrl(url);
 	}
 	return null;
-};
+}

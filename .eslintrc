@@ -1,5 +1,5 @@
 {
-	"extends": ["@ljharb/eslint-config/node/14"],
+	"extends": ["@ljharb/eslint-config/node/22"],
 	"rules": {
 		"complexity": "off",
 		"func-style": "off",

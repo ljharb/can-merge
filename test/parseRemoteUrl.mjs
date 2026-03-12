@@ -1,8 +1,6 @@
-'use strict';
+import test from 'tape';
 
-const test = require('tape');
-
-const parseRemoteUrl = require('../utils/parseRemoteUrl');
+import parseRemoteUrl from '../utils/parseRemoteUrl.mjs';
 
 test('parseRemoteUrl', (t) => {
 	const result = 'ljharb/can-merge';

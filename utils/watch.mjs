@@ -1,8 +1,6 @@
-'use strict';
+import evaluatePending from './evaluatePending.mjs';
 
-const evaluatePending = require('../utils/evaluatePending');
-
-module.exports = async function watch(retryDelay, getResponse) {
+export default async function watch(retryDelay, getResponse) {
 	const response = await getResponse();
 
 	const isPendingChecks = evaluatePending(response);
@@ -16,4 +14,4 @@ module.exports = async function watch(retryDelay, getResponse) {
 	}, retryDelay);
 
 	return watch(retryDelay, getResponse);
-};
+}

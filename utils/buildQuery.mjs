@@ -1,7 +1,5 @@
 /* eslint-disable max-lines-per-function */
 
-'use strict';
-
 // eslint-disable-next-line max-params
 const pullRequestQuery = (name, owner, pr, sha) => `
 	search(query: "is:pr repo:${owner}/${name} ${sha ? `sha:${sha}` : ''} ${pr}", type:ISSUE, first: 100) {
@@ -105,7 +103,7 @@ const commitStatusQuery = (name, owner, sha) => `
 	}
 `;
 
-module.exports = function buildQuery({
+export default function buildQuery({
 	name,
 	owner,
 	pr,
@@ -118,4 +116,4 @@ module.exports = function buildQuery({
 			${commit ? commitStatusQuery(name, owner, sha) : ''}
 		}
 	`;
-};
+}

@@ -1,5 +1,3 @@
-'use strict';
-
 function parseStatusChecks(statusCheckRollup, requiredChecks) {
 	const pending = [];
 	const failure = [];
@@ -42,7 +40,7 @@ function parseCheckRuns(statusCheckRollup, requiredChecks) {
 	return { failure, pending };
 }
 
-module.exports = function evaluateChecks(pullRequest, requiredChecks) {
+export default function evaluateChecks(pullRequest, requiredChecks) {
 	const { commits: { nodes: [{ commit: { statusCheckRollup } }] } } = pullRequest;
 
 	if (statusCheckRollup?.contexts?.nodes) {
@@ -58,4 +56,4 @@ module.exports = function evaluateChecks(pullRequest, requiredChecks) {
 	}
 
 	return { failure: [], pending: [] };
-};
+}

@@ -1,9 +1,7 @@
-'use strict';
+import test from 'tape';
 
-const test = require('tape');
-
-const evaluateCommitStatus = require('../utils/evaluateCommitStatus');
-const mockCommitPR = require('./mocks/evalCommit');
+import evaluateCommitStatus from '../utils/evaluateCommitStatus.mjs';
+import mockCommitPR from './mocks/evalCommit.mjs';
 
 test('evaluateCommitStatus', (t) => {
 	mockCommitPR.forEach((mock) => {

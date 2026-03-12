@@ -1,8 +1,6 @@
-'use strict';
-
-const { styleText } = require('util');
-const pullRequestStatus = require('./models/pullRequestStatus');
-const commitStatus = require('./models/commitStatus');
+import { styleText } from 'util';
+import pullRequestStatus from './models/pullRequestStatus.mjs';
+import commitStatus from './models/commitStatus.mjs';
 
 const messages = {
 	[pullRequestStatus.CLOSED]: styleText('redBright', pullRequestStatus.CLOSED),
@@ -13,13 +11,13 @@ const messages = {
 	[pullRequestStatus.REVIEW_DISAPPROVED]: styleText('yellowBright', pullRequestStatus.REVIEW_DISAPPROVED),
 	[pullRequestStatus.REVIEW_REQUIRED]: styleText('redBright', pullRequestStatus.REVIEW_REQUIRED),
 	[pullRequestStatus.STATUS_FAILURE]: styleText('blueBright', pullRequestStatus.STATUS_FAILURE),
-	[pullRequestStatus.STATUSCHECK_PENDING]: styleText('yellowBright', pullRequestStatus.STATUSCHECK_PENDING),
+	// [pullRequestStatus.STATUSCHECK_PENDING]: styleText('yellowBright', pullRequestStatus.STATUSCHECK_PENDING),
 	[commitStatus.STATUS_FAILURE]: styleText('redBright', commitStatus.STATUS_FAILURE),
 	[commitStatus.STATUS_PENDING]: styleText('yellowBright', commitStatus.STATUS_PENDING),
 	[commitStatus.STATUS_SUCCESS]: styleText('greenBright', commitStatus.STATUS_SUCCESS),
 	[commitStatus.STATUS_NOT_FOUND]: styleText('yellowBright', commitStatus.STATUS_NOT_FOUND),
 };
 
-module.exports = function getMessage(response) {
+export default function getMessage(response) {
 	return messages[response] || messages[pullRequestStatus.MERGEABLE];
-};
+}

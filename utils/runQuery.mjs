@@ -1,9 +1,9 @@
-'use strict';
+import graphqlPkg from '@octokit/graphql';
+import buildQuery from './buildQuery.mjs';
 
-const { graphql } = require('@octokit/graphql');
-const buildQuery = require('./buildQuery');
+const { graphql } = graphqlPkg;
 
-module.exports = async function runQuery({ commit, repo, pr, sha, token }) {
+export default async function runQuery({ commit, repo, pr, sha, token }) {
 	const [owner, name] = repo.split('/');
 	let response = null;
 	try {
@@ -16,4 +16,4 @@ module.exports = async function runQuery({ commit, repo, pr, sha, token }) {
 		throw err.message;
 	}
 	return response;
-};
+}

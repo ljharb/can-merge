@@ -1,8 +1,9 @@
-'use strict';
+import { createRequire } from 'module';
+import test from 'tape';
 
-const test = require('tape');
+import filterPullRequest from '../utils/filterPullRequest.mjs';
 
-const filterPullRequest = require('../utils/filterPullRequest');
+const require = createRequire(import.meta.url);
 const mockFilterPR = require('./mocks/filterPR.json');
 
 test('filterPullRequest', (t) => {
@@ -16,4 +17,3 @@ test('filterPullRequest', (t) => {
 
 	t.end();
 });
-

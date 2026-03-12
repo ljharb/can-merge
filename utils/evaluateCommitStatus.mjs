@@ -1,12 +1,10 @@
-'use strict';
-
-const commitStatus = require('./models/commitStatus');
+import commitStatus from './models/commitStatus.mjs';
 
 const success = (commit) => commit?.statusCheckRollup?.state === 'SUCCESS';
 const failure = (commit) => commit?.statusCheckRollup?.state === 'ERROR' || commit?.statusCheckRollup?.state === 'FAILURE';
 const pending = (commit) => commit?.statusCheckRollup?.state === 'PENDING';
 
-module.exports = function evaluateCommitStatus(commit) {
+export default function evaluateCommitStatus(commit) {
 	if (success(commit)) {
 		return commitStatus.STATUS_SUCCESS;
 	}
@@ -17,4 +15,4 @@ module.exports = function evaluateCommitStatus(commit) {
 		return commitStatus.STATUS_PENDING;
 	}
 	return commitStatus.STATUS_NOT_FOUND;
-};
+}

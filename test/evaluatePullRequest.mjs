@@ -1,9 +1,7 @@
-'use strict';
+import test from 'tape';
 
-const test = require('tape');
-
-const evaluatePullRequest = require('../utils/evaluatePullRequest');
-const mockEvalPR = require('./mocks/evalPR');
+import evaluatePullRequest from '../utils/evaluatePullRequest.mjs';
+import mockEvalPR from './mocks/evalPR.mjs';
 
 test('evaluatePullRequest', (t) => {
 	mockEvalPR.forEach((mock) => {

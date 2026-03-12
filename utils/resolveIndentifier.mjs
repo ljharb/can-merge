@@ -1,11 +1,9 @@
-'use strict';
+import { execSync } from 'child_process';
 
-const exec = require('child_process').execSync;
-
-module.exports = (identifier, short = false) => {
+export default (identifier, short = false) => {
 	const command = short ? `git show ${identifier} -s --format="%h"` : `git show ${identifier} -s --format="%H"`;
 	try {
-		return String(exec(command));
+		return String(execSync(command));
 	} catch (e) {
 		return null;
 	}

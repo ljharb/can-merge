@@ -2,16 +2,16 @@
 	"name": "can-merge",
 	"version": "0.1.0",
 	"description": "",
-	"main": "./bin/can-merge",
+	"main": "./bin/can-merge.mjs",
 	"bin": {
-		"can-merge": "./bin/can-merge"
+		"can-merge": "./bin/can-merge.mjs"
 	},
 	"scripts": {
 		"prepublishOnly": "safe-publish-latest",
 		"prepublish": "not-in-publish || npm run prepublishOnly",
 		"lint": "eslint --ext=js,mjs bin/** .",
 		"pretest": "npm run lint",
-		"tests-only": "nyc tape 'test/**/*.js'| tap-spec",
+		"tests-only": "c8 tape 'test/**/*.mjs' | tap-spec",
 		"test": "npm run tests-only",
 		"posttest": "npx npm@\">= 10.2\" audit --production",
 		"generate-readme": "md-magic --path README.md --ignore 'node_modules'",
@@ -33,11 +33,11 @@
 	"devDependencies": {
 		"@ljharb/eslint-config": "^22.2.0",
 		"auto-changelog": "^2.5.0",
+		"c8": "^11.0.0",
 		"encoding": "^0.1.13",
 		"eslint": "^8.57.1",
 		"in-publish": "^2.0.1",
 		"markdown-magic": "^2.6.1",
-		"nyc": "^15.1.0",
 		"object.fromentries": "^2.0.8",
 		"safe-publish-latest": "^2.0.0",
 		"tap-spec": "^5.0.0",
@@ -47,7 +47,7 @@
 		"@octokit/graphql": "^4.8.0",
 		"git-repo-info": "^2.1.1",
 		"parse-git-config": "^3.0.0",
-		"yargs": "^17.4.0"
+		"yargs": "^17.7.2"
 	},
 	"engines": {
 		"node": "^22.22 || ^24.14 || >= 25.8.1"

@@ -1,9 +1,7 @@
-'use strict';
+import parsePullRequest from './parsePullRequest.mjs';
 
-const parsePullRequest = require('../utils/parsePullRequest');
-
-module.exports = function filterPullRequest(response, argPr) {
+export default function filterPullRequest(response, argPr) {
 	const parsedResponse = parsePullRequest(response);
 
 	return argPr ? parsedResponse.filter((pr) => String(pr.number) === argPr) : parsedResponse;
-};
+}
