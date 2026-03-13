@@ -33,7 +33,7 @@ npm install -g can-merge
 
 ## Usage
 
-<!-- MD-MAGIC-EXAMPLE:START (CLI_REFERENCE) -->
+<!-- docs CLI_REFERENCE -->
 ```txt
 $ npx can-merge --help
 Usage: can-merge -p <pr> [-r <repo>]
@@ -51,7 +51,7 @@ Options:
 
 
 ```
-<!-- MD-MAGIC-EXAMPLE:END -->
+<!-- /docs -->
 
 **NOTE**:
 

@@ -17,7 +17,7 @@
 		"tests-only": "c8 tape 'test/**/*.mjs' | tap-spec",
 		"test": "npm run tests-only",
 		"posttest": "npx npm@\">= 10.2\" audit --production",
-		"generate-readme": "md-magic --path README.md --ignore 'node_modules'",
+		"generate-readme": "md-magic --files README.md",
 		"generate-readme:check": "npm run generate-readme && git diff --exit-code README.md",
 		"version": "auto-changelog && git add CHANGELOG.md",
 		"postversion": "auto-changelog && git add CHANGELOG.md && git commit --no-edit --amend && git tag -f \"v$(node -e \"console.log(require('./package.json').version)\")\""
@@ -40,7 +40,7 @@
 		"encoding": "^0.1.13",
 		"eslint": "^8.57.1",
 		"in-publish": "^2.0.1",
-		"markdown-magic": "^2.6.1",
+		"markdown-magic": "^4.8.0",
 		"object.fromentries": "^2.0.8",
 		"safe-publish-latest": "^2.0.0",
 		"tap-spec": "^5.0.0",
