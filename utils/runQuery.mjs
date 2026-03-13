@@ -1,7 +1,5 @@
-import graphqlPkg from '@octokit/graphql';
+import { graphql } from '@octokit/graphql';
 import buildQuery from './buildQuery.mjs';
-
-const { graphql } = graphqlPkg;
 
 export default async function runQuery({ commit, repo, pr, sha, token }) {
 	const [owner, name] = repo.split('/');
