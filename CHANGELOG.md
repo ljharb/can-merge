@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.0](https://github.com/ljharb/can-merge/compare/v0.1.0...v0.2.0) - 2026-03-13
+
+### Commits
+
+- [Breaking] migrate to ESM (.mjs) [`bce96d8`](https://github.com/ljharb/can-merge/commit/bce96d8170db377e08f08e1470ba85d1849d5ba3)
+- [Refactor] replace `yargs` with `pargs` [`700c7b5`](https://github.com/ljharb/can-merge/commit/700c7b583e00eaf471bae8afef2db5a8d874f812)
+- [meta] use `npmignore` instead of `.npmignore` [`0d9dd09`](https://github.com/ljharb/can-merge/commit/0d9dd0928a49b1eca4713ef80146654ae40a761a)
+- [Fix] get proper required status and output to console [`3fa922f`](https://github.com/ljharb/can-merge/commit/3fa922f9b8008c4bb09fa08d22caa4ed946b7a8c)
+- [Deps] replace `chalk` with `util.styleText` [`53c9b8e`](https://github.com/ljharb/can-merge/commit/53c9b8eac3a71af238346585c3ec2118f51d316f)
+- [Refactor] reuse `evaluateChecks` in `evaluatePullRequest` [`c7e6a4e`](https://github.com/ljharb/can-merge/commit/c7e6a4e63b5ce49dcda1baacda66591cb5cfae51)
+- [actions] update workflows [`5bed2ab`](https://github.com/ljharb/can-merge/commit/5bed2abd72fa2e85b67e404e7387d2198c4b5f05)
+- [meta] Update CONTRIBUTING.md [`70cdd5b`](https://github.com/ljharb/can-merge/commit/70cdd5bc8c46f89aa7b0f8d4ade86691ae6827a6)
+- [Dev Deps] update `markdown-magic` to v4 [`1759b9f`](https://github.com/ljharb/can-merge/commit/1759b9f4c8ab5db4e23917f6f711f043951b6c7a)
+- [Fix] display review status first as output now shows check status [`bcd84f1`](https://github.com/ljharb/can-merge/commit/bcd84f126576b0a9fe44708bd82f09480ec45173)
+- [Dev Deps] update `@ljharb/eslint-config`, `auto-changelog`, `eslint`, `markdown-magic`, `object.fromentries`, `tape` [`92389c7`](https://github.com/ljharb/can-merge/commit/92389c7f7a5ecec516f6898764690690ab808ba4)
+- [New] `buildQuery`: return `branchProtectionRule` and `isRequired` [`dbe1367`](https://github.com/ljharb/can-merge/commit/dbe1367e3624a43b8b16b62df1523fc72fef32fc)
+- [Deps] update `@octokit/graphql` to v9 [`9af7540`](https://github.com/ljharb/can-merge/commit/9af75402f73c1536171609c245731751ab0506ec)
+- [Breaking] require `node` `^22.20 || ^24.14 || &gt;= 25.8.1` [`0e3c730`](https://github.com/ljharb/can-merge/commit/0e3c73004074688b8e2327d79252bb927650300e)
+- [Breaking] add `exports` [`90721fe`](https://github.com/ljharb/can-merge/commit/90721fe894ae7e826c122ddf91f69f88744f2df9)
+- [Refactor] rename statuses to required statuses [`76a5e61`](https://github.com/ljharb/can-merge/commit/76a5e61f09562fb6513147c21db6d12a5fc5be87)
+- [meta] use `npm audit` instead of `aud` [`bd658ac`](https://github.com/ljharb/can-merge/commit/bd658ac48bf840a5bfc521b3629b2d3e304b25a2)
+- [Deps] update `pargs` [`d2315c2`](https://github.com/ljharb/can-merge/commit/d2315c20ce9c10d1511149c43f6ae9eace77fc9a)
+- [readme] replace runkit CI badge with shields.io check-runs badge [`0132042`](https://github.com/ljharb/can-merge/commit/0132042c71de667928ef728a5282a52cd8494000)
+- [meta] bump audit-level due to https://github.com/jonschlinkert/parse-git-config#14 [`d5df719`](https://github.com/ljharb/can-merge/commit/d5df719584239d1a776964db1d4956c3fc12f075)
+
 ## v0.1.0 - 2022-04-05
 
 ### Fixed
