@@ -10,6 +10,7 @@ test('getRepo', (t) => {
 	const repo = getRepo(root);
 	t.match(repo, /[^/]+\/can-merge/);
 	t.looseEqual(getRepo(root, 'invalidvalue'), null);
+	t.equal(getRepo('/tmp'), null, 'returns null for a non-git directory');
 
 	t.end();
 });

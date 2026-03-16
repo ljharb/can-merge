@@ -12,6 +12,8 @@ test('getSHA', (t) => {
 	t.match(long, /^[a-zA-Z0-9]{40}$/);
 	t.match(short, /^[a-zA-Z0-9]{10}$/);
 	t.ok(long.startsWith(short), 'short SHA is a prefix of long SHA');
+	t.equal(getSHA('/tmp'), null, 'returns null for a non-git directory');
+	t.equal(getSHA('/tmp', true), null, 'returns null for a non-git directory with short flag');
 
 	t.end();
 });

@@ -218,5 +218,86 @@ export default [
 		"expected": pullRequestStatus.REVIEW_REQUIRED,
 		"description":
 			"evaluation of a PR which requires review but if not an admin with merge rights you return REVIEW_REQUIRED"
+	},
+	{
+		"pullRequest": null,
+		"expected": false,
+		"description": "evaluation of a falsy response should return false"
+	},
+	{
+		"pullRequest": {
+			"state": "CLOSED",
+			"merged": true,
+			"mergeable": "UNKNOWN",
+			"reviewDecision": null,
+			"commits": {
+				"nodes": [
+					{
+						"commit": {
+							"statusCheckRollup": null
+						}
+					}
+				]
+			}
+		},
+		"expected": pullRequestStatus.MERGED,
+		"description": "evaluation of a merged PR should return MERGED"
+	},
+	{
+		"pullRequest": {
+			"state": "CLOSED",
+			"merged": false,
+			"mergeable": "UNKNOWN",
+			"reviewDecision": null,
+			"commits": {
+				"nodes": [
+					{
+						"commit": {
+							"statusCheckRollup": null
+						}
+					}
+				]
+			}
+		},
+		"expected": pullRequestStatus.CLOSED,
+		"description": "evaluation of a closed (not merged) PR should return CLOSED"
+	},
+	{
+		"pullRequest": {
+			"state": "OPEN",
+			"merged": false,
+			"mergeable": "CONFLICTING",
+			"reviewDecision": null,
+			"commits": {
+				"nodes": [
+					{
+						"commit": {
+							"statusCheckRollup": null
+						}
+					}
+				]
+			}
+		},
+		"expected": pullRequestStatus.CONFLICT,
+		"description": "evaluation of a PR with merge conflicts should return CONFLICT"
+	},
+	{
+		"pullRequest": {
+			"state": "OPEN",
+			"merged": false,
+			"mergeable": "MERGEABLE",
+			"reviewDecision": "CHANGES_REQUESTED",
+			"commits": {
+				"nodes": [
+					{
+						"commit": {
+							"statusCheckRollup": null
+						}
+					}
+				]
+			}
+		},
+		"expected": pullRequestStatus.REVIEW_DISAPPROVED,
+		"description": "evaluation of a PR with changes requested should return REVIEW_DISAPPROVED"
 	}
 ];
