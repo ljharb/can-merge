@@ -34,34 +34,43 @@ const { help, values } = await pargs(import.meta.filename, {
 			short: 'c',
 			default: false,
 			type: 'boolean',
+			description: 'check commit status',
 		},
 		pr: {
 			short: 'p',
 			type: 'string',
+			description: 'pull request',
 		},
 		remote: {
 			type: 'string',
+			description: 'remote name',
 		},
 		repo: {
 			short: 'r',
 			type: 'string',
 			default: defaultRepo,
+			defaultDescription: 'the current directory’s repo',
+			description: 'repository',
 		},
 		retryDelay: {
 			default: 5e3,
 			type: 'integer',
+			description: 'delay before polling the api',
 		},
 		sha: {
 			short: 's',
 			default: 'HEAD',
 			type: 'string',
+			description: 'commit SHA, or any git commit-ish',
 		},
 		token: {
 			type: 'string',
+			description: 'github access token',
 		},
 		watch: {
 			short: 'w',
 			type: 'boolean',
+			description: 'watch pending checks',
 		},
 	},
 });

@@ -36,18 +36,19 @@ npm install -g can-merge
 <!-- docs CLI_REFERENCE -->
 ```txt
 $ npx can-merge --help
-Usage: can-merge -p <pr> [-r <repo>]
+Usage: can-merge [options]
 
 Options:
-  -c, --commit        check commit status
-  -p, --pr            pull request
-      --remote        remote name
-  -r, --repo          repository
-      --retryDelay    delay before polling the api (default: 5000)
-  -s, --sha           commit SHA, or any git commit-ish (default: HEAD)
-      --token         github access token
-  -w, --watch         watch pending checks
-      --help          show this help message
+  -c, --[no-]commit           check commit status
+  -p, --pr <string>           pull request
+      --remote <string>       remote name
+  -r, --repo <string>         repository (default: the current directory’s repo)
+      --retryDelay <integer>  delay before polling the api (default: 5000)
+  -s, --sha <string>          commit SHA, or any git commit-ish (default: HEAD)
+      --token <string>        github access token
+  -w, --[no-]watch            watch pending checks
+      --help                  Show this help text
+      --version               Show the version number
 
 
 ```
