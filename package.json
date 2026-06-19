@@ -51,7 +51,7 @@
 	"dependencies": {
 		"@octokit/graphql": "^9.0.3",
 		"git-repo-info": "^2.1.1",
-		"pargs": "^1.4.0",
+		"pargs": "^1.4.2",
 		"parse-git-config": "^3.0.0"
 	},
 	"engines": {
