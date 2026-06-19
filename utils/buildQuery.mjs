@@ -1,7 +1,8 @@
 /* eslint-disable max-lines-per-function */
 
 // eslint-disable-next-line max-params
-const pullRequestQuery = (name, owner, pr, sha) => `
+function pullRequestQuery(name, owner, pr, sha) {
+	return `
 	search(query: "is:pr repo:${owner}/${name} ${sha ? `sha:${sha}` : ''} ${pr}", type:ISSUE, first: 100) {
 		issueCount
 		edges {
@@ -70,8 +71,10 @@ const pullRequestQuery = (name, owner, pr, sha) => `
 		resetAt
 	}
 `;
+}
 
-const commitStatusQuery = (name, owner, sha) => `
+function commitStatusQuery(name, owner, sha) {
+	return `
 	repository(name: "${name}", owner: "${owner}") {
 		commit: object(expression: "${sha}") {
 			... on Commit {
@@ -102,6 +105,7 @@ const commitStatusQuery = (name, owner, sha) => `
 		}
 	}
 `;
+}
 
 export default function buildQuery({
 	name,
