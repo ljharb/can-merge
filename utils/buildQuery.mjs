@@ -1,5 +1,13 @@
 /* eslint-disable max-lines-per-function */
 
+/** @import { BuildQueryParams } from '../types/graphql.js' */
+
+/**
+ * @param {string} name
+ * @param {string} owner
+ * @param {string | number | undefined} pr
+ * @param {string | null} sha
+ */
 // eslint-disable-next-line max-params
 function pullRequestQuery(name, owner, pr, sha) {
 	return `
@@ -73,6 +81,11 @@ function pullRequestQuery(name, owner, pr, sha) {
 `;
 }
 
+/**
+ * @param {string} name
+ * @param {string} owner
+ * @param {string | null} sha
+ */
 function commitStatusQuery(name, owner, sha) {
 	return `
 	repository(name: "${name}", owner: "${owner}") {
@@ -107,6 +120,7 @@ function commitStatusQuery(name, owner, sha) {
 `;
 }
 
+/** @param {BuildQueryParams} params */
 export default function buildQuery({
 	name,
 	owner,

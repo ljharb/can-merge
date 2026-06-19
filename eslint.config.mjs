@@ -12,6 +12,7 @@ export default [
 					max: 64,
 				},
 			],
+			'no-extra-parens': 'off',
 			'object-curly-newline': 'off',
 			'sort-keys': 'off',
 		},

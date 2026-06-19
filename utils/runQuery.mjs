@@ -1,6 +1,12 @@
 import { graphql } from '@octokit/graphql';
 import buildQuery from './buildQuery.mjs';
 
+/** @import { Params, QueryResponse } from '../types/graphql.js' */
+
+/**
+ * @param {Params} params
+ * @returns {Promise<QueryResponse>}
+ */
 export default async function runQuery({ commit, repo, pr, sha, token }) {
 	const [owner, name] = repo.split('/');
 	try {
@@ -10,6 +16,6 @@ export default async function runQuery({ commit, repo, pr, sha, token }) {
 			},
 		});
 	} catch (err) {
-		throw err.message;
+		throw /** @type {Error} */ (err).message;
 	}
 }

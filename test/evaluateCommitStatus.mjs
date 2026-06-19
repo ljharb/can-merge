@@ -6,7 +6,7 @@ import mockCommitPR from './mocks/evalCommit.mjs';
 test('evaluateCommitStatus', (t) => {
 	mockCommitPR.forEach((mock) => {
 		t.equal(
-			evaluateCommitStatus(mock.commitStatus),
+			evaluateCommitStatus(/** @type {any} */ (mock.commitStatus)),
 			mock.expected,
 			mock.description,
 		);

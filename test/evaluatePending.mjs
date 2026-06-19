@@ -4,6 +4,7 @@ import evaluatePending from '../utils/evaluatePending.mjs';
 
 test('evaluatePending', (t) => {
 	t.test('returns true when pullRequest check is pending', (st) => {
+		/** @type {any} */
 		const response = {
 			search: {
 				edges: [{
@@ -29,6 +30,7 @@ test('evaluatePending', (t) => {
 	});
 
 	t.test('returns true when commit check is pending', (st) => {
+		/** @type {any} */
 		const response = {
 			search: {
 				edges: [{
@@ -54,6 +56,7 @@ test('evaluatePending', (t) => {
 	});
 
 	t.test('returns false when neither check is pending', (st) => {
+		/** @type {any} */
 		const response = {
 			search: {
 				edges: [{

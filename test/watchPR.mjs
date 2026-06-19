@@ -3,9 +3,10 @@ import test from 'tape';
 
 import watch from '../utils/watch.mjs';
 
-const require = createRequire(import.meta.url);
-const mockWatchPR = require('./mocks/watchPR.json');
+const requireJSON = createRequire(import.meta.url);
+const mockWatchPR = requireJSON('./mocks/watchPR.json');
 
+/** @param {any[]} iterable */
 const iter = (iterable) => {
 	const it = iterable.values();
 	return () => it.next().value;

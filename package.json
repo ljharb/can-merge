@@ -14,6 +14,7 @@
 		"prepublishOnly": "safe-publish-latest",
 		"prepublish": "not-in-publish || npm run prepublishOnly",
 		"lint": "eslint .",
+		"postlint": "tsc -p .",
 		"pretest": "npm run lint",
 		"tests-only": "c8 tape 'test/**/*.mjs' | tap-spec",
 		"test": "npm run tests-only",
@@ -36,6 +37,10 @@
 	"homepage": "https://github.com/ljharb/can-merge#readme",
 	"devDependencies": {
 		"@ljharb/eslint-config": "^22.2.3",
+		"@ljharb/tsconfig": "^0.3.2",
+		"@types/node": "^22.19.21",
+		"@types/object.fromentries": "^2.0.4",
+		"@types/parse-git-config": "^3.0.4",
 		"auto-changelog": "^2.6.0",
 		"c8": "^11.0.0",
 		"eslint": "^10.5.0",
@@ -46,7 +51,8 @@
 		"object.fromentries": "^2.0.8",
 		"safe-publish-latest": "^2.0.0",
 		"tap-spec": "^5.0.0",
-		"tape": "^5.10.2"
+		"tape": "^5.10.2",
+		"typescript": "next"
 	},
 	"dependencies": {
 		"@octokit/graphql": "^9.0.3",
@@ -66,7 +72,9 @@
 			".github/*.gif",
 			"CONTRIBUTING.md",
 			"md.config.js",
-			"test/"
+			"test/",
+			"tsconfig.json",
+			"types/"
 		]
 	},
 	"auto-changelog": {

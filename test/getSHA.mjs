@@ -7,8 +7,8 @@ import getSHA from '../utils/getSHA.mjs';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 test('getSHA', (t) => {
-	const long = getSHA(root);
-	const short = getSHA(root, true);
+	const long = /** @type {string} */ (getSHA(root));
+	const short = /** @type {string} */ (getSHA(root, true));
 	t.match(long, /^[a-zA-Z0-9]{40}$/);
 	t.match(short, /^[a-zA-Z0-9]{10}$/);
 	t.ok(long.startsWith(short), 'short SHA is a prefix of long SHA');

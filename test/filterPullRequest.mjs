@@ -3,8 +3,9 @@ import test from 'tape';
 
 import filterPullRequest from '../utils/filterPullRequest.mjs';
 
-const require = createRequire(import.meta.url);
-const mockFilterPR = require('./mocks/filterPR.json');
+const requireJSON = createRequire(import.meta.url);
+/** @type {any[]} */
+const mockFilterPR = requireJSON('./mocks/filterPR.json');
 
 test('filterPullRequest', (t) => {
 	mockFilterPR.forEach((mock) => {

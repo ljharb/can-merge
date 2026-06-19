@@ -3,8 +3,9 @@ import test from 'tape';
 
 import parsePullRequest from '../utils/parsePullRequest.mjs';
 
-const require = createRequire(import.meta.url);
-const mockParsePR = require('./mocks/parsePR.json');
+const requireJSON = createRequire(import.meta.url);
+/** @type {any[]} */
+const mockParsePR = requireJSON('./mocks/parsePR.json');
 
 test('parsePullRequest', (t) => {
 	mockParsePR.forEach((mock) => {

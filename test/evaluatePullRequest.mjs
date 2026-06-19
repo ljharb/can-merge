@@ -6,7 +6,7 @@ import mockEvalPR from './mocks/evalPR.mjs';
 test('evaluatePullRequest', (t) => {
 	mockEvalPR.forEach((mock) => {
 		t.equal(
-			evaluatePullRequest(mock.pullRequest),
+			evaluatePullRequest(/** @type {any} */ (mock.pullRequest)),
 			mock.expected,
 			mock.description,
 		);

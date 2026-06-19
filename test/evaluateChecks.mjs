@@ -4,6 +4,7 @@ import evaluateChecks from '../utils/evaluateChecks.mjs';
 
 test('evaluateChecks', (t) => {
 	t.test('returns empty arrays when all CheckRun conclusions are SUCCESS', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -31,6 +32,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('parses CheckRun failures when a CheckRun has non-SUCCESS conclusion', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -73,6 +75,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('uses requiredChecks list when provided for CheckRuns', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -100,6 +103,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('returns empty arrays when statusCheckRollup is null', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -116,6 +120,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('uses requiredChecks list when provided for StatusContext', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -142,6 +147,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('handles StatusContext PENDING with requiredChecks', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -168,6 +174,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('handles pending CheckRun without requiredChecks falling back to isRequired', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -195,6 +202,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('handles pending CheckRun with requiredChecks matching', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -222,6 +230,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('handles pending CheckRun with requiredChecks not matching', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -249,6 +258,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('handles CheckRun failure with requiredChecks not matching', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{
@@ -276,6 +286,7 @@ test('evaluateChecks', (t) => {
 	});
 
 	t.test('handles StatusContext ERROR state', (st) => {
+		/** @type {any} */
 		const pr = {
 			commits: {
 				nodes: [{

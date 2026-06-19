@@ -9,7 +9,12 @@ module.exports = {
 			const result = childProcess.execSync('node ./bin/can-merge.mjs --help', {
 				env: { ...process.env, GH_TOKEN: undefined, GITHUB_TOKEN: undefined },
 			});
-			return [].concat('```txt', '$ npx can-merge --help', String(result), '```').join('\n');
+			return /** @type {string[]} */ ([]).concat(
+				'```txt',
+				'$ npx can-merge --help',
+				String(result),
+				'```',
+			).join('\n');
 		},
 	},
 };

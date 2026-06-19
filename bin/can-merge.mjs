@@ -20,6 +20,8 @@ import filterPullRequest from '../utils/filterPullRequest.mjs';
 import resolveIndentifier from '../utils/resolveIndentifier.mjs';
 import getPRWithRequiredChecks from '../utils/getPRWithRequiredChecks.mjs';
 
+/** @import { Check, Params, QueryResponse } from '../types/graphql.js' */
+
 const {
 	GITHUB_TOKEN,
 	GH_TOKEN,
@@ -48,7 +50,7 @@ const { help, values } = await pargs(import.meta.filename, {
 		repo: {
 			short: 'r',
 			type: 'string',
-			default: defaultRepo,
+			default: defaultRepo ?? undefined,
 			defaultDescription: 'the current directory’s repo',
 			description: 'repository',
 		},
@@ -137,6 +139,7 @@ if (shouldWatch && !sha && !argPR) {
 
 const token = argToken || GITHUB_TOKEN || GH_TOKEN;
 
+/** @param {Check[]} checks */
 function displayChecks(checks) {
 	checks.forEach((p) => {
 		if (p.isRequired) {
@@ -147,6 +150,10 @@ function displayChecks(checks) {
 	});
 }
 
+/**
+ * @param {Check[]} failure
+ * @param {Check[]} pending
+ */
 function outputChecks(failure, pending) {
 	if (pending.length > 0) {
 		console.info(styleText('red', `Pending Checks (${pending.length}):`));
@@ -158,18 +165,23 @@ function outputChecks(failure, pending) {
 	}
 }
 
+/**
+ * @param {QueryResponse} response
+ * @param {Params} params
+ */
 function outputStatus(response, params) {
 	if (NODE_ENV === 'DEBUG') {
 		console.error(JSON.stringify(response, null, 2));
 	}
 	if (commit) {
-		if (response.repository.commit === null) {
+		const { repository } = /** @type {Required<QueryResponse>} */ (response);
+		if (repository.commit === null) {
 			console.info(styleText('redBright', `⚠ This remote repository does not contain any commits matching sha: ${sha}`));
 		} else {
-			const status = evaluateCommitStatus(response.repository.commit);
+			const status = evaluateCommitStatus(repository.commit);
 			console.info(getMessage(status));
 			if (status !== commitStatus.STATUS_SUCCESS) {
-				process.exitCode = (process.exitCode ?? 0) + 1;
+				process.exitCode = /** @type {number} */ (process.exitCode ?? 0) + 1;
 			}
 		}
 	}
@@ -185,9 +197,9 @@ function outputStatus(response, params) {
 			prs.forEach((pr) => {
 				const requiredChecks = pr.baseRef?.branchProtectionRule?.requiredStatusCheckContexts;
 				const status = evaluatePullRequest(pr, requiredChecks);
-				console.info(pr.url, 'by @'.concat(pr.author.login, ':'), pr.title, '\n', getMessage(status), '\n');
+				console.info(pr.url, 'by @'.concat(pr.author.login, ':'), pr.title, '\n', getMessage(/** @type {string} */ (status)), '\n');
 				if (status !== pullRequestStatus.MERGEABLE) {
-					process.exitCode = (process.exitCode ?? 0) + 1;
+					process.exitCode = /** @type {number} */ (process.exitCode ?? 0) + 1;
 				}
 				const { failure, pending } = evaluateChecks(pr, requiredChecks);
 

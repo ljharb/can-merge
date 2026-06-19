@@ -1,6 +1,13 @@
 import parsePullRequest from './parsePullRequest.mjs';
 import runQuery from './runQuery.mjs';
 
+/** @import { Params, PullRequest } from '../types/graphql.js' */
+
+/**
+ * @param {PullRequest[]} response
+ * @param {Params} params
+ * @returns {Promise<PullRequest[]>}
+ */
 export default async function getPRWithRequiredChecks(response, params) {
 	// If --pr is specified
 	if (params.pr) {
@@ -19,9 +26,9 @@ export default async function getPRWithRequiredChecks(response, params) {
 		try {
 			const newResponse = await runQuery(newParams);
 			const responseWithRequiredChecks = parsePullRequest(newResponse);
-			return responseWithRequiredChecks.find((pr) => pr.number === newParams.pr);
+			return /** @type {PullRequest} */ (responseWithRequiredChecks.find((pr) => pr.number === newParams.pr));
 		} catch (err) {
-			throw err.message;
+			throw /** @type {Error} */ (err).message;
 		}
 	}));
 }

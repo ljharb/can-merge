@@ -1,8 +1,15 @@
 import pullRequestStatus from './models/pullRequestStatus.mjs';
 import evaluateChecks from './evaluateChecks.mjs';
 
+/** @import { PullRequest } from '../types/graphql.js' */
+
+/** @param {PullRequest} pullRequest */
 const doesPRHaveConflicts = (pullRequest) => pullRequest.mergeable === 'MERGEABLE';
 
+/**
+ * @param {PullRequest | null} [response]
+ * @param {string[] | null | undefined} [requiredChecks]
+ */
 export default function evaluatePullRequest(response, requiredChecks) {
 	if (!response) {
 		return false;

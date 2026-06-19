@@ -18,6 +18,7 @@ const messages = {
 	[commitStatus.STATUS_NOT_FOUND]: styleText('yellowBright', commitStatus.STATUS_NOT_FOUND),
 };
 
+/** @param {string} response */
 export default function getMessage(response) {
 	return messages[response] || messages[pullRequestStatus.MERGEABLE];
 }
