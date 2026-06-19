@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.1](https://github.com/ljharb/can-merge/compare/v0.2.0...v0.2.1) - 2026-06-18
+
+### Commits
+
+- [Tests] increase coverage [`ab75e50`](https://github.com/ljharb/can-merge/commit/ab75e50e9c60abcc81898394a7bbf5be22f98973)
+- [New] add types [`6660cd3`](https://github.com/ljharb/can-merge/commit/6660cd3d4bcb2c7ae4e8a89b66fd27f0607517e9)
+- [Dev Deps] update `eslint` [`aea779a`](https://github.com/ljharb/can-merge/commit/aea779ae2f0aca8f6c6aa340a27fbb2056036674)
+- [Deps] update `pargs` [`256c329`](https://github.com/ljharb/can-merge/commit/256c329037cb81fb4f88714d18f809d96d8f8afa)
+- [Refactor] use function declarations and reformat ternaries [`814151e`](https://github.com/ljharb/can-merge/commit/814151ebef7ec28555c2c2f5c4beeefecb996cb2)
+- [Dev Deps] update `@ljharb/eslint-config`, `auto-changelog`, `markdown-magic`, `tape` [`4afaea4`](https://github.com/ljharb/can-merge/commit/4afaea4c85d5513353c111c0e74bc054543d1d66)
+- [actions] update workflows [`b73d23d`](https://github.com/ljharb/can-merge/commit/b73d23d3434a11c1414a3b48164dcf8154514722)
+- [Deps] update `pargs` [`bdc1d11`](https://github.com/ljharb/can-merge/commit/bdc1d11cdd69cca70334170dd7474ee1b11fe8b2)
+
 ## [v0.2.0](https://github.com/ljharb/can-merge/compare/v0.1.0...v0.2.0) - 2026-03-13
 
 ### Commits
