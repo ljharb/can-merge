@@ -1,0 +1,8 @@
+{
+	"repositories": [
+		"facebook/react",
+		"ethereum/solidity",
+		"nodejs/node",
+		"facebook/create-react-app"
+	]
+}
